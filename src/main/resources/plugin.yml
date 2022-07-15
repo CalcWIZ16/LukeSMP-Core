@@ -1,0 +1,5 @@
+name: MainLukeSMP
+version: ${project.version}
+main: net.lukesmp.main.Main
+api-version: 1.18
+authors: [ SmexyLuke ]
