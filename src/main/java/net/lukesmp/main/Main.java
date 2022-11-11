@@ -1,19 +1,24 @@
 package net.lukesmp.main;
 
 import org.bukkit.*;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityPortalEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.PlayerChatEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.*;
+import org.bukkit.event.world.WorldInitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffectType;
 
+import java.awt.*;
 import java.util.Random;
 
 
@@ -22,17 +27,107 @@ public final class Main extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         // Plugin startup logic
-        Bukkit.getPluginManager().registerEvents(this,this);
+        Bukkit.getPluginManager().registerEvents(this, this);
+        new WorldCreator("world1").createWorld();
+        new WorldCreator("world1_nether").environment(World.Environment.NETHER).createWorld();
+        new WorldCreator("world2").createWorld();
+        new WorldCreator("world2_nether").environment(World.Environment.NETHER).createWorld();
+        new WorldCreator("world3").createWorld();
+        new WorldCreator("world3_nether").environment(World.Environment.NETHER).createWorld();
+        new WorldCreator("world4").createWorld();
+        new WorldCreator("world4_nether").environment(World.Environment.NETHER).createWorld();
     }
 
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+    }
+    Random rand = new Random();
+
+    @EventHandler
+    public void playerPortalEvent(PlayerPortalEvent event) {
+        Player player = event.getPlayer();
+        World world = player.getWorld();
+        if (world.getEnvironment()==World.Environment.NORMAL) {
+            event.getTo().setWorld(Bukkit.getWorld(world.getName()+"_nether"));
+        }
+        if (world.getEnvironment()==World.Environment.NETHER) {
+            if (world==Bukkit.getWorld("world1_nether")) {
+                event.getTo().setWorld(Bukkit.getWorld("world1"));
+            }
+            else if (world==Bukkit.getWorld("world2_nether")) {
+                event.getTo().setWorld(Bukkit.getWorld("world2"));
+            }
+            else if (world==Bukkit.getWorld("world3_nether")) {
+                event.getTo().setWorld(Bukkit.getWorld("world3"));
+            }
+            else if (world==Bukkit.getWorld("world4_nether")) {
+                event.getTo().setWorld(Bukkit.getWorld("world4"));
+            }
+        }
 
     }
 
-    Random rand = new Random();
+    //Remove spawn chunks from memory
+    @EventHandler
+    public void onInit(WorldInitEvent event) {
+        event.getWorld().setKeepSpawnInMemory(false);
+    }
 
+    //world switcher
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (command.getName().equalsIgnoreCase("getworld")){
+            if (sender instanceof Player){
+                Player player = (Player) sender;
+                player.sendMessage(player.getWorld().getName());
+            }
+            return true;
+        }
+        if (command.getName().equalsIgnoreCase("world")) {
+            if (args.length == 0) {
+                sender.sendMessage(ChatColor.RED + "Please specify a world!");
+                return true;
+            }
+            if (args.length == 1) {
+                World world = Bukkit.getWorld(args[0]);
+                if (world == null) {
+                    sender.sendMessage(ChatColor.RED + "That world does not exist!");
+                    return true;
+                }
+                if (sender instanceof Player) {
+                    Player player = (Player) sender;
+                    player.teleport(world.getSpawnLocation());
+                    player.sendMessage(ChatColor.GREEN + "Teleported to " + world.getName());
+                    return true;
+                }
+                sender.sendMessage(ChatColor.RED + "You must be a player to use this command!");
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
+
+    //kill on 'The B'
+    @EventHandler
+    public void onPlayerMove(PlayerMoveEvent event){
+        Player player=event.getPlayer();
+        Location loc=player.getLocation();
+        if((loc.getWorld()==Bukkit.getWorld("s4world"))){
+            if((loc.getBlockX() >= -521) && (player.getLocation().getBlockX() <= -520)){
+                if((loc.getBlockY() == 68)){
+                    if((loc.getBlockZ() >= -180) && (player.getLocation().getBlockZ() <= -179)){
+                        player.setHealth(0);
+                    }
+                }
+            }
+        }
+    }
+
+    //custom chat messages
     @EventHandler
     public void playerChatEvent(PlayerChatEvent event){
         String player=event.getPlayer().getDisplayName();
@@ -45,11 +140,11 @@ public final class Main extends JavaPlugin implements Listener {
         Player player=event.getPlayer();
 
         //tab header/footer
-        player.setPlayerListHeader(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"LukeSMP"+ChatColor.GRAY+""+ChatColor.BOLD+""+ChatColor.MAGIC+" | "+ChatColor.DARK_PURPLE+"Season 4");
+        player.setPlayerListHeader(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"LukeSMP"+ChatColor.GRAY+""+ChatColor.BOLD+""+ChatColor.MAGIC+" | "+ChatColor.DARK_PURPLE+"Season 5");
         player.setPlayerListFooter(ChatColor.GRAY+""+ChatColor.BOLD+ChatColor.MAGIC+" | "+ChatColor.RED+"mc.lukesmp.net"+ChatColor.GRAY+ChatColor.BOLD+ChatColor.MAGIC+" | ");
 
         //title at join
-        player.sendTitle(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"Luke"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season 4");
+        player.sendTitle(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"Luke"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season 5");
 
         //change join message
         event.setJoinMessage(ChatColor.DARK_AQUA+"Luke"+ChatColor.DARK_PURPLE+"SMP"+ChatColor.RESET+" "+ChatColor.GRAY+ChatColor.BOLD+ChatColor.MAGIC+"|"+ChatColor.RESET+" "+ChatColor.RESET+ChatColor.GREEN+player.getDisplayName()+ChatColor.GRAY+" has joined");
@@ -58,35 +153,17 @@ public final class Main extends JavaPlugin implements Listener {
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event){
         Player player=event.getPlayer();
-
         //change quit message
         event.setQuitMessage(ChatColor.DARK_AQUA+"Luke"+ChatColor.DARK_PURPLE+"SMP"+ChatColor.GRAY+""+ChatColor.BOLD+ChatColor.MAGIC+" | "+ChatColor.RED+player.getDisplayName()+ChatColor.GRAY+" has left");
     }
 
     @EventHandler
-    public void onPlayerMove(PlayerMoveEvent event){
-        for(Player player : Bukkit.getOnlinePlayers()){
-            if((player.getLocation().getBlockX() >= -521) && (player.getLocation().getBlockX() <= -520)){
-                if((player.getLocation().getBlockY() == 67)){
-                    if((player.getLocation().getBlockZ() >= -180) && (player.getLocation().getBlockZ() <= -179)){
-//                        Location loc = new Location(Bukkit.getWorld("world"), -523.5, 67, -177.5, 0, 0);
-                        Location loc = player.getLocation().add(0, 1, 0);
-                        player.teleport(loc);
-                        player.setHealth(0);
-                    }
-                }
-            }
-        }
-    }
-
-    @EventHandler
-    public void onPlayerDeath(PlayerDeathEvent event) {
+    public void playerDeathEvent(PlayerDeathEvent event){
         Player player=event.getEntity().getPlayer();
         Location l = event.getEntity().getLocation();
         World w = event.getEntity().getWorld();
         String deathMessage=event.getDeathMessage();
         Location deathLocation = event.getEntity().getLocation();
-
         if (event.getEntity().getKiller() != null){
             String killer=event.getEntity().getKiller().getDisplayName();
             String deathMessage1=deathMessage.replace(player.getDisplayName(), ChatColor.RED+player.getDisplayName()+ChatColor.GRAY);
@@ -99,6 +176,7 @@ public final class Main extends JavaPlugin implements Listener {
             event.setDeathMessage(ChatColor.DARK_AQUA+"Luke"+ChatColor.DARK_PURPLE+"SMP"+ChatColor.RESET+" "+ChatColor.GRAY+ChatColor.BOLD+ChatColor.MAGIC+"|"+ChatColor.RESET+" "+deathMessage2);
         }
 
+        //died on B
         if((deathLocation.getBlockX() >= -521) && (player.getLocation().getBlockX() <= -520)){
             if((deathLocation.getBlockY() == 68)){
                 if((deathLocation.getBlockZ() >= -180) && (player.getLocation().getBlockZ() <= -179)){
@@ -127,9 +205,9 @@ public final class Main extends JavaPlugin implements Listener {
         if (player.getUniqueId().toString().equals("2c1f5eaf-cc7e-4016-a836-05a81e300ca4")){
             w.dropItemNaturally(l, new ItemStack(Material.APPLE, rand.nextInt(4)));
         }
-
     }
 
+    //custom pet death messages
     @EventHandler
     public void entityDamageEvent(EntityDamageEvent event){
         Entity entity=event.getEntity();
@@ -144,7 +222,7 @@ public final class Main extends JavaPlugin implements Listener {
                     String message="";
                     switch (event.getCause()){
                         case BLOCK_EXPLOSION:
-                            message=ChatColor.RED+petName+ChatColor.GRAY+" blew up";
+                            message= ChatColor.RED+petName+ChatColor.GRAY+" blew up";
                             break;
                         case CONTACT:
                             message=ChatColor.RED+petName+ChatColor.GRAY+" shouldn't have touched that";
@@ -175,7 +253,7 @@ public final class Main extends JavaPlugin implements Listener {
                             message=ChatColor.RED+petName+ChatColor.GRAY+" realized they couldn't fly";
                             break;
                         case FALLING_BLOCK:
-                            message=ChatColor.RED+petName+ChatColor.GRAY+" was hit in the head by a falling block";
+                            message=ChatColor.RED+petName+ChatColor.GRAY+" should've wore a helmet";
                             break;
                         case FIRE:
                         case FIRE_TICK:
