@@ -17,6 +17,7 @@ import org.bukkit.event.world.WorldInitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.Vector;
 
 import java.awt.*;
 import java.util.Random;
@@ -48,24 +49,43 @@ public final class Main extends JavaPlugin implements Listener {
     public void playerPortalEvent(PlayerPortalEvent event) {
         Player player = event.getPlayer();
         World world = player.getWorld();
-        if (world.getEnvironment()==World.Environment.NORMAL) {
-            event.getTo().setWorld(Bukkit.getWorld(world.getName()+"_nether"));
+        if (event.getCause() == PlayerTeleportEvent.TeleportCause.NETHER_PORTAL) {
+            if (world.getEnvironment()==World.Environment.NORMAL) {
+                event.getTo().setWorld(Bukkit.getWorld(world.getName()+"_nether"));
+            }
+            if (world.getEnvironment()==World.Environment.NETHER) {
+                if (world==Bukkit.getWorld("world1_nether")) {
+                    event.getTo().setWorld(Bukkit.getWorld("world1"));
+                }
+                else if (world==Bukkit.getWorld("world2_nether")) {
+                    event.getTo().setWorld(Bukkit.getWorld("world2"));
+                }
+                else if (world==Bukkit.getWorld("world3_nether")) {
+                    event.getTo().setWorld(Bukkit.getWorld("world3"));
+                }
+                else if (world==Bukkit.getWorld("world4_nether")) {
+                    event.getTo().setWorld(Bukkit.getWorld("world4"));
+                }
+            }
         }
-        if (world.getEnvironment()==World.Environment.NETHER) {
-            if (world==Bukkit.getWorld("world1_nether")) {
-                event.getTo().setWorld(Bukkit.getWorld("world1"));
-            }
-            else if (world==Bukkit.getWorld("world2_nether")) {
-                event.getTo().setWorld(Bukkit.getWorld("world2"));
-            }
-            else if (world==Bukkit.getWorld("world3_nether")) {
-                event.getTo().setWorld(Bukkit.getWorld("world3"));
-            }
-            else if (world==Bukkit.getWorld("world4_nether")) {
-                event.getTo().setWorld(Bukkit.getWorld("world4"));
-            }
-        }
+        else if (event.getCause() == PlayerTeleportEvent.TeleportCause.END_PORTAL) {
+            //position of portal + teleport logic
+            if (world==Bukkit.getWorld("world")) {
 
+            }
+            else {
+                event.getTo().setWorld(Bukkit.getWorld("world"));
+                event.getTo().setX(165.5);
+                event.getTo().setY(120);
+                event.getTo().setZ(108.5);
+            }
+
+            Vector world1Portal = new Vector(0, 0, 0);
+            Vector world2Portal = new Vector(0, 0, 0);
+            Vector world3Portal = new Vector(0, 0, 0);
+            Vector world4Portal = new Vector(0, 0, 0);
+
+        }
     }
 
     //Remove spawn chunks from memory
