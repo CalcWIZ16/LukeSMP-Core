@@ -1,14 +1,7 @@
 name: MainLukeSMP
-version: 5.0.5
+version: 4.7.3
 main: net.lukesmp.main.Main
 api-version: 1.18
 authors: [ SmexyLuke ]
 description: Main plugin for LukeSMP
 website: https://lukesmp.net
-commands:
-  world:
-    description: Teleports you to the world
-    usage: /world
-  getworld:
-    description: Gets the world you are in
-    usage: /getworld

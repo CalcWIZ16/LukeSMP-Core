@@ -5,10 +5,3 @@ api-version: 1.18
 authors: [ SmexyLuke ]
 description: Main plugin for LukeSMP
 website: https://lukesmp.net
-commands:
-  world:
-    description: Teleports you to the world
-    usage: /world
-  getworld:
-    description: Gets the world you are in
-    usage: /getworld

@@ -44,72 +44,11 @@ public final class Main extends JavaPlugin implements Listener {
     }
     Random rand = new Random();
 
-    @EventHandler
-    public void playerPortalEvent(PlayerPortalEvent event) {
-        Player player = event.getPlayer();
-        World world = player.getWorld();
-        if (world.getEnvironment()==World.Environment.NORMAL) {
-            event.getTo().setWorld(Bukkit.getWorld(world.getName()+"_nether"));
-        }
-        if (world.getEnvironment()==World.Environment.NETHER) {
-            if (world==Bukkit.getWorld("world1_nether")) {
-                event.getTo().setWorld(Bukkit.getWorld("world1"));
-            }
-            else if (world==Bukkit.getWorld("world2_nether")) {
-                event.getTo().setWorld(Bukkit.getWorld("world2"));
-            }
-            else if (world==Bukkit.getWorld("world3_nether")) {
-                event.getTo().setWorld(Bukkit.getWorld("world3"));
-            }
-            else if (world==Bukkit.getWorld("world4_nether")) {
-                event.getTo().setWorld(Bukkit.getWorld("world4"));
-            }
-        }
-
-    }
-
     //Remove spawn chunks from memory
     @EventHandler
     public void onInit(WorldInitEvent event) {
         event.getWorld().setKeepSpawnInMemory(false);
     }
-
-    //world switcher
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (command.getName().equalsIgnoreCase("getworld")){
-            if (sender instanceof Player){
-                Player player = (Player) sender;
-                player.sendMessage(player.getWorld().getName());
-            }
-            return true;
-        }
-        if (command.getName().equalsIgnoreCase("world")) {
-            if (args.length == 0) {
-                sender.sendMessage(ChatColor.RED + "Please specify a world!");
-                return true;
-            }
-            if (args.length == 1) {
-                World world = Bukkit.getWorld(args[0]);
-                if (world == null) {
-                    sender.sendMessage(ChatColor.RED + "That world does not exist!");
-                    return true;
-                }
-                if (sender instanceof Player) {
-                    Player player = (Player) sender;
-                    player.teleport(world.getSpawnLocation());
-                    player.sendMessage(ChatColor.GREEN + "Teleported to " + world.getName());
-                    return true;
-                }
-                sender.sendMessage(ChatColor.RED + "You must be a player to use this command!");
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-
 
     //kill on 'The B'
     @EventHandler
