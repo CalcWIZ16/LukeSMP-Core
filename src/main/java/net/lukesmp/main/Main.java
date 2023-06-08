@@ -28,14 +28,6 @@ public final class Main extends JavaPlugin implements Listener {
     public void onEnable() {
         // Plugin startup logic
         Bukkit.getPluginManager().registerEvents(this, this);
-        new WorldCreator("world1").createWorld();
-        new WorldCreator("world1_nether").environment(World.Environment.NETHER).createWorld();
-        new WorldCreator("world2").createWorld();
-        new WorldCreator("world2_nether").environment(World.Environment.NETHER).createWorld();
-        new WorldCreator("world3").createWorld();
-        new WorldCreator("world3_nether").environment(World.Environment.NETHER).createWorld();
-        new WorldCreator("world4").createWorld();
-        new WorldCreator("world4_nether").environment(World.Environment.NETHER).createWorld();
     }
 
     @Override
