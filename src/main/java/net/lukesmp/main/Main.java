@@ -1,6 +1,7 @@
 package net.lukesmp.main;
 
 import org.bukkit.*;
+import org.bukkit.advancement.Advancement;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
@@ -87,6 +88,15 @@ public final class Main extends JavaPlugin implements Listener {
         //change quit message
         event.setQuitMessage(ChatColor.DARK_AQUA+"Luke"+ChatColor.DARK_PURPLE+"SMP"+ChatColor.GRAY+""+ChatColor.BOLD+ChatColor.MAGIC+" | "+ChatColor.RED+player.getDisplayName()+ChatColor.GRAY+" has left");
     }
+
+//    @EventHandler
+//    public void advancementGranted(PlayerAdvancementDoneEvent event){
+//        Player player=event.getPlayer();
+//        Advancement advancement = event.getAdvancement();
+//        String advancementName = advancement.getKey().getKey();
+//
+//
+//    }
 
     @EventHandler
     public void playerDeathEvent(PlayerDeathEvent event){
