@@ -1,6 +1,7 @@
 package net.lukesmp.main;
 
 import org.bukkit.*;
+import org.bukkit.block.Block;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
@@ -9,11 +10,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityPortalEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.event.world.WorldInitEvent;
+import org.bukkit.inventory.BeaconInventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffectType;
@@ -44,6 +47,65 @@ public final class Main extends JavaPlugin implements Listener {
         // Plugin shutdown logic
     }
     Random rand = new Random();
+
+
+    @EventHandler
+    public void onBlockBreakEvent(BlockBreakEvent event) {
+        if (event.getBlock().getType() == Material.OBSIDIAN) {
+            Player player = event.getPlayer();
+            Block block = event.getBlock();
+            Integer x = block.getX();
+            Integer y = block.getY();
+            Integer z = block.getZ();
+            Bukkit.broadcastMessage("X: " + x + " Y: " + y + " Z: " + z);
+            if (block.getWorld().getName().equals("world")) {
+                //passageways
+                if (y>=122){
+                    if (-1042<=x && x<=-1038) {
+                        //North passage
+                        if (707<=z && z<=748) {
+                            event.setCancelled(true);
+                        }
+                        //South passage
+                        if (776<=z && z<=817) {
+                            event.setCancelled(true);
+                        }
+                    }
+                    if (760<=z && z<=764) {
+                        //East passage
+                        if (-1026<=x && x<=-985) {
+                            event.setCancelled(true);
+                        }
+                        //West passage
+                        if (-1095<=x && x<=-1054) {
+                            event.setCancelled(true);
+                        }
+                    }
+                }
+                //spires
+                if (-1044<=x && x<=-1036){
+                    //south spire
+                    if (818<=z && z<=826) {
+                        event.setCancelled(true);
+                    }
+                    //north spire
+                    if (698<=z && z<=706) {
+                        event.setCancelled(true);
+                    }
+                }
+                if (758<=z && z<=766) {
+                    //east spire
+                    if (-984<=x && x<=-976) {
+                        event.setCancelled(true);
+                    }
+                    //west spire
+                    if (-1104<=x && x<=-1096) {
+                        event.setCancelled(true);
+                    }
+                }
+            }
+        }
+    }
 
     @EventHandler
     public void playerPortalEvent(PlayerPortalEvent event) {
@@ -128,10 +190,7 @@ public final class Main extends JavaPlugin implements Listener {
         return false;
     }
 
-
-
-
-    //kill on 'The B'
+    //world travel
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event){
         Player player=event.getPlayer();
@@ -205,7 +264,7 @@ public final class Main extends JavaPlugin implements Listener {
             }
         }
 
-        //SmexyLuke death
+        //CalcWIZ death
         if (player.getUniqueId().toString().equals("46257261-7468-4a8b-bb32-b7f5a78f7a0a")){
             w.dropItemNaturally(l, new ItemStack(Material.GUNPOWDER, rand.nextInt(4)));
         }

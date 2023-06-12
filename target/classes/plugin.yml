@@ -1,7 +1,7 @@
 name: MainLukeSMP
-version: 5.0.5
+version: 5.1.0
 main: net.lukesmp.main.Main
-api-version: 1.18
+api-version: 1.19
 authors: [ SmexyLuke ]
 description: Main plugin for LukeSMP
 website: https://lukesmp.net
