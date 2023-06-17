@@ -11,6 +11,7 @@ import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityPortalEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -20,6 +21,7 @@ import org.bukkit.inventory.BeaconInventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import java.awt.*;
@@ -32,14 +34,14 @@ public final class Main extends JavaPlugin implements Listener {
     public void onEnable() {
         // Plugin startup logic
         Bukkit.getPluginManager().registerEvents(this, this);
-        new WorldCreator("world1").createWorld();
-        new WorldCreator("world1_nether").environment(World.Environment.NETHER).createWorld();
-        new WorldCreator("world2").createWorld();
-        new WorldCreator("world2_nether").environment(World.Environment.NETHER).createWorld();
-        new WorldCreator("world3").createWorld();
-        new WorldCreator("world3_nether").environment(World.Environment.NETHER).createWorld();
-        new WorldCreator("world4").createWorld();
-        new WorldCreator("world4_nether").environment(World.Environment.NETHER).createWorld();
+//        new WorldCreator("world1").createWorld();
+//        new WorldCreator("world1_nether").environment(World.Environment.NETHER).createWorld();
+//        new WorldCreator("world2").createWorld();
+//        new WorldCreator("world2_nether").environment(World.Environment.NETHER).createWorld();
+//        new WorldCreator("world3").createWorld();
+//        new WorldCreator("world3_nether").environment(World.Environment.NETHER).createWorld();
+//        new WorldCreator("world4").createWorld();
+//        new WorldCreator("world4_nether").environment(World.Environment.NETHER).createWorld();
     }
 
     @Override
@@ -51,13 +53,12 @@ public final class Main extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onBlockBreakEvent(BlockBreakEvent event) {
-        if (event.getBlock().getType() == Material.OBSIDIAN) {
+        if (event.getBlock().getType() == Material.OBSIDIAN || event.getBlock().getType() == Material.DEEPSLATE_BRICKS || event.getBlock().getType() == Material.CRACKED_DEEPSLATE_BRICKS) {
             Player player = event.getPlayer();
             Block block = event.getBlock();
             Integer x = block.getX();
             Integer y = block.getY();
             Integer z = block.getZ();
-            Bukkit.broadcastMessage("X: " + x + " Y: " + y + " Z: " + z);
             if (block.getWorld().getName().equals("world")) {
                 //passageways
                 if (y>=122){
@@ -102,6 +103,60 @@ public final class Main extends JavaPlugin implements Listener {
                     if (-1104<=x && x<=-1096) {
                         event.setCancelled(true);
                     }
+                }
+            }
+        }
+    }
+    @EventHandler
+    public void onBlockPlaceEvent(BlockPlaceEvent event) {
+        Player player = event.getPlayer();
+        Block block = event.getBlock();
+        Integer x = block.getX();
+        Integer y = block.getY();
+        Integer z = block.getZ();
+        if (block.getWorld().getName().equals("world")) {
+            //passageways
+            if (y >= 122) {
+                if (-1042 <= x && x <= -1038) {
+                    //North passage
+                    if (707 <= z && z <= 748) {
+                        event.setCancelled(true);
+                    }
+                    //South passage
+                    if (776 <= z && z <= 817) {
+                        event.setCancelled(true);
+                    }
+                }
+                if (760 <= z && z <= 764) {
+                    //East passage
+                    if (-1026 <= x && x <= -985) {
+                        event.setCancelled(true);
+                    }
+                    //West passage
+                    if (-1095 <= x && x <= -1054) {
+                        event.setCancelled(true);
+                    }
+                }
+            }
+            //spires
+            if (-1044 <= x && x <= -1036) {
+                //south spire
+                if (818 <= z && z <= 826) {
+                    event.setCancelled(true);
+                }
+                //north spire
+                if (698 <= z && z <= 706) {
+                    event.setCancelled(true);
+                }
+            }
+            if (758 <= z && z <= 766) {
+                //east spire
+                if (-984 <= x && x <= -976) {
+                    event.setCancelled(true);
+                }
+                //west spire
+                if (-1104 <= x && x <= -1096) {
+                    event.setCancelled(true);
                 }
             }
         }
@@ -222,11 +277,57 @@ public final class Main extends JavaPlugin implements Listener {
         player.setPlayerListHeader(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"LukeSMP"+ChatColor.GRAY+""+ChatColor.BOLD+""+ChatColor.MAGIC+" | "+ChatColor.DARK_PURPLE+"Season 5");
         player.setPlayerListFooter(ChatColor.GRAY+""+ChatColor.BOLD+ChatColor.MAGIC+" | "+ChatColor.RED+"mc.lukesmp.net"+ChatColor.GRAY+ChatColor.BOLD+ChatColor.MAGIC+" | ");
 
-        //title at join
-        player.sendTitle(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"Luke"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season 5");
-
         //change join message
         event.setJoinMessage(ChatColor.DARK_AQUA+"Luke"+ChatColor.DARK_PURPLE+"SMP"+ChatColor.RESET+" "+ChatColor.GRAY+ChatColor.BOLD+ChatColor.MAGIC+"|"+ChatColor.RESET+" "+ChatColor.RESET+ChatColor.GREEN+player.getDisplayName()+ChatColor.GRAY+" has joined");
+
+        //title at join
+        if (player.hasPlayedBefore()) {
+            player.sendTitle(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"Luke"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season 5");
+        }
+        else {
+            player.sendTitle(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"Lucy"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season 5");
+            player.playSound(player.getLocation(), Sound.ITEM_TRIDENT_THUNDER, 1, 1);
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    player.sendTitle(ChatColor.DARK_AQUA+""+ChatColor.MAGIC+ChatColor.BOLD+"Lucy"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season 5", 0, 20, 0);
+                }
+            }.runTaskLater(this, 30L);
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    player.sendTitle(ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season 5", 0, 20, 0);
+                }
+            }.runTaskLater(this, 40L);
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    player.sendTitle(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"L"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season 5", 0, 20, 0);
+                    player.playSound(player.getLocation(), Sound.UI_BUTTON_CLICK, 1, 1);
+                }
+            }.runTaskLater(this, 42L);
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    player.sendTitle(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"Lu"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season 5", 0, 20, 0);
+                    player.playSound(player.getLocation(), Sound.UI_BUTTON_CLICK, 1, 1);
+                }
+            }.runTaskLater(this, 44L);
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    player.sendTitle(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"Luk"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season 5", 0, 20, 0);
+                    player.playSound(player.getLocation(), Sound.UI_BUTTON_CLICK, 1, 1);
+                }
+            }.runTaskLater(this, 46L);
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    player.sendTitle(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"Luke"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season 5", 0, 70, 20);
+                    player.playSound(player.getLocation(), Sound.UI_BUTTON_CLICK, 1, 1);
+                }
+            }.runTaskLater(this, 48L);
+        }
     }
 
     @EventHandler
