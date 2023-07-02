@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DiscordProjectSettings">
+<<<<<<< HEAD
     <option name="show" value="PROJECT" />
+=======
+    <option name="show" value="ASK" />
+>>>>>>> Season-5
     <option name="description" value="" />
   </component>
 </project>

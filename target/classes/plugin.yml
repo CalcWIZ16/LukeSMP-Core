@@ -1,7 +1,11 @@
 name: MainLukeSMP
+<<<<<<< HEAD
 version: 4.7.3
+=======
+version: 5.1.0
+>>>>>>> Season-5
 main: net.lukesmp.main.Main
-api-version: 1.18
+api-version: 1.19
 authors: [ SmexyLuke ]
 description: Main plugin for LukeSMP
 website: https://lukesmp.net

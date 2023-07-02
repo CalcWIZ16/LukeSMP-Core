@@ -1,7 +1,11 @@
 package net.lukesmp.main;
 
 import org.bukkit.*;
+<<<<<<< HEAD
 import org.bukkit.advancement.Advancement;
+=======
+import org.bukkit.block.Block;
+>>>>>>> Season-5
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
@@ -10,14 +14,19 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityPortalEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.event.world.WorldInitEvent;
+import org.bukkit.inventory.BeaconInventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
 
 import java.awt.*;
 import java.util.Random;
@@ -29,6 +38,17 @@ public final class Main extends JavaPlugin implements Listener {
     public void onEnable() {
         // Plugin startup logic
         Bukkit.getPluginManager().registerEvents(this, this);
+<<<<<<< HEAD
+=======
+//        new WorldCreator("world1").createWorld();
+//        new WorldCreator("world1_nether").environment(World.Environment.NETHER).createWorld();
+//        new WorldCreator("world2").createWorld();
+//        new WorldCreator("world2_nether").environment(World.Environment.NETHER).createWorld();
+//        new WorldCreator("world3").createWorld();
+//        new WorldCreator("world3_nether").environment(World.Environment.NETHER).createWorld();
+//        new WorldCreator("world4").createWorld();
+//        new WorldCreator("world4_nether").environment(World.Environment.NETHER).createWorld();
+>>>>>>> Season-5
     }
 
     @Override
@@ -37,13 +57,209 @@ public final class Main extends JavaPlugin implements Listener {
     }
     Random rand = new Random();
 
+<<<<<<< HEAD
+=======
+
+    @EventHandler
+    public void onBlockBreakEvent(BlockBreakEvent event) {
+        if (event.getBlock().getType() == Material.OBSIDIAN || event.getBlock().getType() == Material.DEEPSLATE_BRICKS || event.getBlock().getType() == Material.CRACKED_DEEPSLATE_BRICKS) {
+            Player player = event.getPlayer();
+            Block block = event.getBlock();
+            Integer x = block.getX();
+            Integer y = block.getY();
+            Integer z = block.getZ();
+            if (block.getWorld().getName().equals("world")) {
+                //passageways
+                if (y>=122){
+                    if (-1042<=x && x<=-1038) {
+                        //North passage
+                        if (707<=z && z<=748) {
+                            event.setCancelled(true);
+                        }
+                        //South passage
+                        if (776<=z && z<=817) {
+                            event.setCancelled(true);
+                        }
+                    }
+                    if (760<=z && z<=764) {
+                        //East passage
+                        if (-1026<=x && x<=-985) {
+                            event.setCancelled(true);
+                        }
+                        //West passage
+                        if (-1095<=x && x<=-1054) {
+                            event.setCancelled(true);
+                        }
+                    }
+                }
+                //spires
+                if (-1044<=x && x<=-1036){
+                    //south spire
+                    if (818<=z && z<=826) {
+                        event.setCancelled(true);
+                    }
+                    //north spire
+                    if (698<=z && z<=706) {
+                        event.setCancelled(true);
+                    }
+                }
+                if (758<=z && z<=766) {
+                    //east spire
+                    if (-984<=x && x<=-976) {
+                        event.setCancelled(true);
+                    }
+                    //west spire
+                    if (-1104<=x && x<=-1096) {
+                        event.setCancelled(true);
+                    }
+                }
+            }
+        }
+    }
+    @EventHandler
+    public void onBlockPlaceEvent(BlockPlaceEvent event) {
+        Player player = event.getPlayer();
+        Block block = event.getBlock();
+        Integer x = block.getX();
+        Integer y = block.getY();
+        Integer z = block.getZ();
+        if (block.getWorld().getName().equals("world")) {
+            //passageways
+            if (y >= 122) {
+                if (-1042 <= x && x <= -1038) {
+                    //North passage
+                    if (707 <= z && z <= 748) {
+                        event.setCancelled(true);
+                    }
+                    //South passage
+                    if (776 <= z && z <= 817) {
+                        event.setCancelled(true);
+                    }
+                }
+                if (760 <= z && z <= 764) {
+                    //East passage
+                    if (-1026 <= x && x <= -985) {
+                        event.setCancelled(true);
+                    }
+                    //West passage
+                    if (-1095 <= x && x <= -1054) {
+                        event.setCancelled(true);
+                    }
+                }
+            }
+            //spires
+            if (-1044 <= x && x <= -1036) {
+                //south spire
+                if (818 <= z && z <= 826) {
+                    event.setCancelled(true);
+                }
+                //north spire
+                if (698 <= z && z <= 706) {
+                    event.setCancelled(true);
+                }
+            }
+            if (758 <= z && z <= 766) {
+                //east spire
+                if (-984 <= x && x <= -976) {
+                    event.setCancelled(true);
+                }
+                //west spire
+                if (-1104 <= x && x <= -1096) {
+                    event.setCancelled(true);
+                }
+            }
+        }
+    }
+
+    @EventHandler
+    public void playerPortalEvent(PlayerPortalEvent event) {
+        Player player = event.getPlayer();
+        World world = player.getWorld();
+        if (event.getCause() == PlayerTeleportEvent.TeleportCause.NETHER_PORTAL) {
+            if (world.getEnvironment()==World.Environment.NORMAL) {
+                event.getTo().setWorld(Bukkit.getWorld(world.getName()+"_nether"));
+            }
+            if (world.getEnvironment()==World.Environment.NETHER) {
+                if (world==Bukkit.getWorld("world1_nether")) {
+                    event.getTo().setWorld(Bukkit.getWorld("world1"));
+                }
+                else if (world==Bukkit.getWorld("world2_nether")) {
+                    event.getTo().setWorld(Bukkit.getWorld("world2"));
+                }
+                else if (world==Bukkit.getWorld("world3_nether")) {
+                    event.getTo().setWorld(Bukkit.getWorld("world3"));
+                }
+                else if (world==Bukkit.getWorld("world4_nether")) {
+                    event.getTo().setWorld(Bukkit.getWorld("world4"));
+                }
+            }
+        }
+        else if (event.getCause() == PlayerTeleportEvent.TeleportCause.END_PORTAL) {
+            //position of portal + teleport logic
+            if (world==Bukkit.getWorld("world")) {
+
+            }
+            else {
+                event.getTo().setWorld(Bukkit.getWorld("world"));
+                event.getTo().setX(165.5);
+                event.getTo().setY(120);
+                event.getTo().setZ(108.5);
+            }
+
+            Vector world1Portal = new Vector(0, 0, 0);
+            Vector world2Portal = new Vector(0, 0, 0);
+            Vector world3Portal = new Vector(0, 0, 0);
+            Vector world4Portal = new Vector(0, 0, 0);
+
+        }
+    }
+
+>>>>>>> Season-5
     //Remove spawn chunks from memory
     @EventHandler
     public void onInit(WorldInitEvent event) {
         event.getWorld().setKeepSpawnInMemory(false);
     }
 
+<<<<<<< HEAD
     //kill on 'The B'
+=======
+    //world switcher
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (command.getName().equalsIgnoreCase("getworld")){
+            if (sender instanceof Player){
+                Player player = (Player) sender;
+                player.sendMessage(player.getWorld().getName());
+            }
+            return true;
+        }
+        if (command.getName().equalsIgnoreCase("world")) {
+            if (args.length == 0) {
+                sender.sendMessage(ChatColor.RED + "Please specify a world!");
+                return true;
+            }
+            if (args.length == 1) {
+                World world = Bukkit.getWorld(args[0]);
+                if (world == null) {
+                    sender.sendMessage(ChatColor.RED + "That world does not exist!");
+                    return true;
+                }
+                if (sender instanceof Player) {
+                    Player player = (Player) sender;
+                    player.teleport(world.getSpawnLocation());
+                    player.sendMessage(ChatColor.GREEN + "Teleported to " + world.getName());
+                    return true;
+                }
+                sender.sendMessage(ChatColor.RED + "You must be a player to use this command!");
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //world travel
+>>>>>>> Season-5
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event){
         Player player=event.getPlayer();
@@ -75,11 +291,57 @@ public final class Main extends JavaPlugin implements Listener {
         player.setPlayerListHeader(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"LukeSMP"+ChatColor.GRAY+""+ChatColor.BOLD+""+ChatColor.MAGIC+" | "+ChatColor.DARK_PURPLE+"Season 5");
         player.setPlayerListFooter(ChatColor.GRAY+""+ChatColor.BOLD+ChatColor.MAGIC+" | "+ChatColor.RED+"mc.lukesmp.net"+ChatColor.GRAY+ChatColor.BOLD+ChatColor.MAGIC+" | ");
 
-        //title at join
-        player.sendTitle(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"Luke"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season 5");
-
         //change join message
         event.setJoinMessage(ChatColor.DARK_AQUA+"Luke"+ChatColor.DARK_PURPLE+"SMP"+ChatColor.RESET+" "+ChatColor.GRAY+ChatColor.BOLD+ChatColor.MAGIC+"|"+ChatColor.RESET+" "+ChatColor.RESET+ChatColor.GREEN+player.getDisplayName()+ChatColor.GRAY+" has joined");
+
+        //title at join
+        if (player.hasPlayedBefore()) {
+            player.sendTitle(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"Luke"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season 5");
+        }
+        else {
+            player.sendTitle(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"Lucy"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season 5");
+            player.playSound(player.getLocation(), Sound.ITEM_TRIDENT_THUNDER, 1, 1);
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    player.sendTitle(ChatColor.DARK_AQUA+""+ChatColor.MAGIC+ChatColor.BOLD+"Lucy"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season 5", 0, 20, 0);
+                }
+            }.runTaskLater(this, 30L);
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    player.sendTitle(ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season 5", 0, 20, 0);
+                }
+            }.runTaskLater(this, 40L);
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    player.sendTitle(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"L"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season 5", 0, 20, 0);
+                    player.playSound(player.getLocation(), Sound.UI_BUTTON_CLICK, 1, 1);
+                }
+            }.runTaskLater(this, 42L);
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    player.sendTitle(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"Lu"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season 5", 0, 20, 0);
+                    player.playSound(player.getLocation(), Sound.UI_BUTTON_CLICK, 1, 1);
+                }
+            }.runTaskLater(this, 44L);
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    player.sendTitle(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"Luk"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season 5", 0, 20, 0);
+                    player.playSound(player.getLocation(), Sound.UI_BUTTON_CLICK, 1, 1);
+                }
+            }.runTaskLater(this, 46L);
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    player.sendTitle(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"Luke"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season 5", 0, 70, 20);
+                    player.playSound(player.getLocation(), Sound.UI_BUTTON_CLICK, 1, 1);
+                }
+            }.runTaskLater(this, 48L);
+        }
     }
 
     @EventHandler
@@ -126,7 +388,7 @@ public final class Main extends JavaPlugin implements Listener {
             }
         }
 
-        //SmexyLuke death
+        //CalcWIZ death
         if (player.getUniqueId().toString().equals("46257261-7468-4a8b-bb32-b7f5a78f7a0a")){
             w.dropItemNaturally(l, new ItemStack(Material.GUNPOWDER, rand.nextInt(4)));
         }
