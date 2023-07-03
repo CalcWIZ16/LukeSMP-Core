@@ -4,6 +4,8 @@ import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Tameable;
@@ -21,6 +23,8 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
 
 public final class LukeSMPCore extends JavaPlugin implements Listener {
@@ -37,6 +41,16 @@ public final class LukeSMPCore extends JavaPlugin implements Listener {
     //        new WorldCreator("world3_nether").environment(World.Environment.NETHER).createWorld();
     //        new WorldCreator("world4").createWorld();
     //        new WorldCreator("world4_nether").environment(World.Environment.NETHER).createWorld();
+
+//        File deaths = new File("plugins/LukeSMPCore/deaths.yml");
+//        FileConfiguration deathsFile = YamlConfiguration.loadConfiguration(deaths);
+//        if (!deaths.exists()) {
+////            try {
+////                deaths.createNewFile();
+////            } catch (IOException e) {
+////                throw new RuntimeException(e);
+////            }
+//        }
     }
 
     @Override
@@ -349,6 +363,11 @@ public final class LukeSMPCore extends JavaPlugin implements Listener {
         World w = event.getEntity().getWorld();
         String deathMessage=event.getDeathMessage();
         Location deathLocation = event.getEntity().getLocation();
+
+        File deaths = new File("plugins/LukeSMPCore/deaths.yml");
+        FileConfiguration deathsFile = YamlConfiguration.loadConfiguration(deaths);
+        deathsFile.set("deaths."+player.getUniqueId().toString(), deathsFile.getInt("deaths."+player.getUniqueId().toString())+1);
+
         if (event.getEntity().getKiller() != null){
             String killer=event.getEntity().getKiller().getDisplayName();
             String deathMessage1=deathMessage.replace(player.getDisplayName(), ChatColor.RED+player.getDisplayName()+ChatColor.GRAY);
