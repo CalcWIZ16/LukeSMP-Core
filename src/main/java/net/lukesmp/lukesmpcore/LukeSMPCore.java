@@ -1,54 +1,42 @@
-package net.lukesmp.main;
+package net.lukesmp.lukesmpcore;
 
 import org.bukkit.*;
-<<<<<<< HEAD
-import org.bukkit.advancement.Advancement;
-=======
 import org.bukkit.block.Block;
->>>>>>> Season-5
-import org.bukkit.boss.BarColor;
-import org.bukkit.boss.BarStyle;
-import org.bukkit.boss.BossBar;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Tameable;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityPortalEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.event.world.WorldInitEvent;
-import org.bukkit.inventory.BeaconInventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-import java.awt.*;
 import java.util.Random;
 
-
-public final class Main extends JavaPlugin implements Listener {
+public final class LukeSMPCore extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
         // Plugin startup logic
         Bukkit.getPluginManager().registerEvents(this, this);
-<<<<<<< HEAD
-=======
-//        new WorldCreator("world1").createWorld();
-//        new WorldCreator("world1_nether").environment(World.Environment.NETHER).createWorld();
-//        new WorldCreator("world2").createWorld();
-//        new WorldCreator("world2_nether").environment(World.Environment.NETHER).createWorld();
-//        new WorldCreator("world3").createWorld();
-//        new WorldCreator("world3_nether").environment(World.Environment.NETHER).createWorld();
-//        new WorldCreator("world4").createWorld();
-//        new WorldCreator("world4_nether").environment(World.Environment.NETHER).createWorld();
->>>>>>> Season-5
+    //        new WorldCreator("world1").createWorld();
+    //        new WorldCreator("world1_nether").environment(World.Environment.NETHER).createWorld();
+    //        new WorldCreator("world2").createWorld();
+    //        new WorldCreator("world2_nether").environment(World.Environment.NETHER).createWorld();
+    //        new WorldCreator("world3").createWorld();
+    //        new WorldCreator("world3_nether").environment(World.Environment.NETHER).createWorld();
+    //        new WorldCreator("world4").createWorld();
+    //        new WorldCreator("world4_nether").environment(World.Environment.NETHER).createWorld();
     }
 
     @Override
@@ -57,8 +45,7 @@ public final class Main extends JavaPlugin implements Listener {
     }
     Random rand = new Random();
 
-<<<<<<< HEAD
-=======
+
 
     @EventHandler
     public void onBlockBreakEvent(BlockBreakEvent event) {
@@ -214,16 +201,12 @@ public final class Main extends JavaPlugin implements Listener {
         }
     }
 
->>>>>>> Season-5
     //Remove spawn chunks from memory
     @EventHandler
     public void onInit(WorldInitEvent event) {
         event.getWorld().setKeepSpawnInMemory(false);
     }
 
-<<<<<<< HEAD
-    //kill on 'The B'
-=======
     //world switcher
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -259,7 +242,6 @@ public final class Main extends JavaPlugin implements Listener {
     }
 
     //world travel
->>>>>>> Season-5
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event){
         Player player=event.getPlayer();
@@ -351,14 +333,14 @@ public final class Main extends JavaPlugin implements Listener {
         event.setQuitMessage(ChatColor.DARK_AQUA+"Luke"+ChatColor.DARK_PURPLE+"SMP"+ChatColor.GRAY+""+ChatColor.BOLD+ChatColor.MAGIC+" | "+ChatColor.RED+player.getDisplayName()+ChatColor.GRAY+" has left");
     }
 
-//    @EventHandler
-//    public void advancementGranted(PlayerAdvancementDoneEvent event){
-//        Player player=event.getPlayer();
-//        Advancement advancement = event.getAdvancement();
-//        String advancementName = advancement.getKey().getKey();
-//
-//
-//    }
+    //    @EventHandler
+    //    public void advancementGranted(PlayerAdvancementDoneEvent event){
+    //        Player player=event.getPlayer();
+    //        Advancement advancement = event.getAdvancement();
+    //        String advancementName = advancement.getKey().getKey();
+    //
+    //
+    //    }
 
     @EventHandler
     public void playerDeathEvent(PlayerDeathEvent event){

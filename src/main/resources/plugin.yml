@@ -1,7 +1,7 @@
-name: MainLukeSMP
-version: ${project.version}
-main: net.lukesmp.main.Main
-api-version: 1.19
-authors: [ SmexyLuke ]
-description: Main plugin for LukeSMP
-website: https://lukesmp.net
+name: LukeSMPCore
+version: '${project.version}'
+main: net.lukesmp.lukesmpcore.LukeSMPCore
+api-version: '1.20'
+authors: [CalcWIZ]
+description: A SpigotMC plugin that manages the fundamental cosmetic and behavioral features of the LukeSMP server
+website: https://www.lukesmp.net
