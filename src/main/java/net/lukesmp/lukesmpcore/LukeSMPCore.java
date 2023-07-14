@@ -290,7 +290,7 @@ public final class LukeSMPCore extends JavaPlugin implements Listener {
         event.setJoinMessage(ChatColor.DARK_AQUA+"Luke"+ChatColor.DARK_PURPLE+"SMP"+ChatColor.RESET+" "+ChatColor.GRAY+ChatColor.BOLD+ChatColor.MAGIC+"|"+ChatColor.RESET+" "+ChatColor.RESET+ChatColor.GREEN+player.getDisplayName()+ChatColor.GRAY+" has joined");
 
         //title at join
-        int random = (int) (Math.random() * 3);
+        int random = (int) (Math.random() * 5);
         if (random==2){
             player.sendTitle(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"Lucy"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season 5");
             new BukkitRunnable() {
