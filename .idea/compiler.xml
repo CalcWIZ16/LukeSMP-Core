@@ -9,5 +9,8 @@
         <module name="LukeSMPCore" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="main" target="16" />
+    </bytecodeTargetLevel>
   </component>
 </project>

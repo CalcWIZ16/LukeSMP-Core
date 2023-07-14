@@ -290,12 +290,9 @@ public final class LukeSMPCore extends JavaPlugin implements Listener {
         event.setJoinMessage(ChatColor.DARK_AQUA+"Luke"+ChatColor.DARK_PURPLE+"SMP"+ChatColor.RESET+" "+ChatColor.GRAY+ChatColor.BOLD+ChatColor.MAGIC+"|"+ChatColor.RESET+" "+ChatColor.RESET+ChatColor.GREEN+player.getDisplayName()+ChatColor.GRAY+" has joined");
 
         //title at join
-        if (player.hasPlayedBefore()) {
-            player.sendTitle(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"Luke"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season 5");
-        }
-        else {
+        int random = (int) (Math.random() * 10);
+        if (random==5){
             player.sendTitle(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"Lucy"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season 5");
-            player.playSound(player.getLocation(), Sound.ITEM_TRIDENT_THUNDER, 1, 1);
             new BukkitRunnable() {
                 @Override
                 public void run() {
@@ -336,6 +333,9 @@ public final class LukeSMPCore extends JavaPlugin implements Listener {
                     player.playSound(player.getLocation(), Sound.UI_BUTTON_CLICK, 1, 1);
                 }
             }.runTaskLater(this, 48L);
+        }
+        else {
+            player.sendTitle(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"Luke"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season 5");
         }
     }
 
