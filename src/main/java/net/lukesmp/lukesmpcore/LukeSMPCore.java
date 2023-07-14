@@ -363,9 +363,9 @@ public final class LukeSMPCore extends JavaPlugin implements Listener {
         String deathMessage=event.getDeathMessage();
         Location deathLocation = event.getEntity().getLocation();
 
-        File deaths = new File("plugins/LukeSMPCore/deaths.yml");
-        FileConfiguration deathsFile = YamlConfiguration.loadConfiguration(deaths);
-        deathsFile.set("deaths."+player.getUniqueId().toString(), "death 1");
+//        File deaths = new File("plugins/LukeSMPCore/deaths.yml");
+//        FileConfiguration deathsFile = YamlConfiguration.loadConfiguration(deaths);
+//        deathsFile.set("deaths."+player.getUniqueId().toString(), "death 1");
 
 
         if (event.getEntity().getKiller() != null){
