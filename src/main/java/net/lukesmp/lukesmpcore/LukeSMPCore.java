@@ -309,28 +309,24 @@ public final class LukeSMPCore extends JavaPlugin implements Listener {
                 @Override
                 public void run() {
                     player.sendTitle(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"L"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season 5", 0, 20, 0);
-                    player.playSound(player.getLocation(), Sound.UI_BUTTON_CLICK, 1, 1);
                 }
             }.runTaskLater(this, 42L);
             new BukkitRunnable() {
                 @Override
                 public void run() {
                     player.sendTitle(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"Lu"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season 5", 0, 20, 0);
-                    player.playSound(player.getLocation(), Sound.UI_BUTTON_CLICK, 1, 1);
                 }
             }.runTaskLater(this, 44L);
             new BukkitRunnable() {
                 @Override
                 public void run() {
                     player.sendTitle(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"Luk"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season 5", 0, 20, 0);
-                    player.playSound(player.getLocation(), Sound.UI_BUTTON_CLICK, 1, 1);
                 }
             }.runTaskLater(this, 46L);
             new BukkitRunnable() {
                 @Override
                 public void run() {
                     player.sendTitle(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"Luke"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season 5", 0, 70, 20);
-                    player.playSound(player.getLocation(), Sound.UI_BUTTON_CLICK, 1, 1);
                 }
             }.runTaskLater(this, 48L);
         }
