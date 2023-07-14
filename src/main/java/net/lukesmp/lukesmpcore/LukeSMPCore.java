@@ -42,14 +42,14 @@ public final class LukeSMPCore extends JavaPlugin implements Listener {
     //        new WorldCreator("world4").createWorld();
     //        new WorldCreator("world4_nether").environment(World.Environment.NETHER).createWorld();
 
-        File deaths = new File("plugins/LukeSMPCore/deaths.yml");
-        if (!deaths.exists()) {
-            try {
-                deaths.createNewFile();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
+//        File deaths = new File("plugins/LukeSMPCore/deaths.yml");
+//        if (!deaths.exists()) {
+//            try {
+//                deaths.createNewFile();
+//            } catch (IOException e) {
+//                throw new RuntimeException(e);
+//            }
+//        }
     }
 
     @Override
