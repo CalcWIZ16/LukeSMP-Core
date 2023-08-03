@@ -21,6 +21,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.util.Vector;
 
 import java.io.File;
@@ -359,9 +361,11 @@ public final class LukeSMPCore extends JavaPlugin implements Listener {
         String deathMessage=event.getDeathMessage();
         Location deathLocation = event.getEntity().getLocation();
 
-//        File deaths = new File("plugins/LukeSMPCore/deaths.yml");
-//        FileConfiguration deathsFile = YamlConfiguration.loadConfiguration(deaths);
-//        deathsFile.set("deaths."+player.getUniqueId().toString(), "death 1");
+        //when player dies, update tab menu number to show death count from player statistic
+        int deathCount = player.getStatistic(Statistic.DEATHS);
+        player.setPlayerListName(ChatColor.RED+player.getDisplayName()+ChatColor.GRAY+" ("+deathCount+")");
+
+
 
 
         if (event.getEntity().getKiller() != null){
