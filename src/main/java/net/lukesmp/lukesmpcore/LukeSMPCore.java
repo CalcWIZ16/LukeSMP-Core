@@ -361,11 +361,9 @@ public final class LukeSMPCore extends JavaPlugin implements Listener {
         String deathMessage=event.getDeathMessage();
         Location deathLocation = event.getEntity().getLocation();
 
-        //when player dies, update tab menu number to show death count from player statistic
-        int deathCount = player.getStatistic(Statistic.DEATHS);
-        player.setPlayerListName(ChatColor.RED+player.getDisplayName()+ChatColor.GRAY+" ("+deathCount+")");
-
-
+        //when player dies, update scoreboard and set player list name
+        player.setPlayerListName(ChatColor.RED+player.getDisplayName()+ChatColor.RESET);
+        player.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
 
 
         if (event.getEntity().getKiller() != null){
