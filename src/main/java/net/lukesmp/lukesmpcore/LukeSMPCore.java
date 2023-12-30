@@ -19,6 +19,7 @@ import org.bukkit.event.player.*;
 import org.bukkit.event.world.WorldInitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.Scoreboard;
@@ -356,15 +357,17 @@ public final class LukeSMPCore extends JavaPlugin implements Listener {
     @EventHandler
     public void playerDeathEvent(PlayerDeathEvent event){
         Player player=event.getEntity().getPlayer();
-        Location l = event.getEntity().getLocation();
+        Location deathLocation = event.getEntity().getLocation();
         World w = event.getEntity().getWorld();
         String deathMessage=event.getDeathMessage();
-        Location deathLocation = event.getEntity().getLocation();
 
         //when player dies, update scoreboard and set player list name
         player.setPlayerListName(ChatColor.RED+player.getDisplayName()+ChatColor.RESET);
         player.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
 
+//        if (player.getActivePotionEffects().contains(PotionEffectType.INVISIBILITY)) {
+//
+//        }
 
         if (event.getEntity().getKiller() != null){
             String killer=event.getEntity().getKiller().getDisplayName();
