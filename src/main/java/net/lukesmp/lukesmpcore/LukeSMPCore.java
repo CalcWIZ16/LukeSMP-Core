@@ -365,9 +365,9 @@ public final class LukeSMPCore extends JavaPlugin implements Listener {
         player.setPlayerListName(ChatColor.RED+player.getDisplayName()+ChatColor.RESET);
         player.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
 
-//        if (player.getActivePotionEffects().contains(PotionEffectType.INVISIBILITY)) {
-//
-//        }
+        if (player.getActivePotionEffects().contains(PotionEffectType.INVISIBILITY)) {
+
+        }
 
         if (event.getEntity().getKiller() != null){
             String killer=event.getEntity().getKiller().getDisplayName();
@@ -382,9 +382,9 @@ public final class LukeSMPCore extends JavaPlugin implements Listener {
         }
 
         //died on B
-        if((deathLocation.getBlockX() >= -521) && (player.getLocation().getBlockX() <= -520)){
+        if((deathLocation.getBlockX() >= -521) && (deathLocation.getBlockX() <= -520)){
             if((deathLocation.getBlockY() == 68)){
-                if((deathLocation.getBlockZ() >= -180) && (player.getLocation().getBlockZ() <= -179)){
+                if((deathLocation.getBlockZ() >= -180) && (deathLocation.getBlockZ() <= -179)){
                     event.setDeathMessage(ChatColor.DARK_AQUA+"Luke"+ChatColor.DARK_PURPLE+"SMP"+ChatColor.RESET+" "+ChatColor.GRAY+ChatColor.BOLD+ChatColor.MAGIC+"|"+ChatColor.RED+" "+player.getDisplayName()+ChatColor.GRAY+" recieved a JUG");
                 }
             }
@@ -392,23 +392,23 @@ public final class LukeSMPCore extends JavaPlugin implements Listener {
 
         //CalcWIZ death
         if (player.getUniqueId().toString().equals("46257261-7468-4a8b-bb32-b7f5a78f7a0a")){
-            w.dropItemNaturally(l, new ItemStack(Material.GUNPOWDER, rand.nextInt(4)));
+            w.dropItemNaturally(deathLocation, new ItemStack(Material.GUNPOWDER, rand.nextInt(4)));
         }
         //Light_5_Squid death
         if (player.getUniqueId().toString().equals("32eb72fb-daa3-4f9d-91b6-82031daac3a3")){
             if (player.hasPotionEffect(PotionEffectType.GLOWING)){
-                w.dropItemNaturally(l, new ItemStack(Material.GLOW_INK_SAC, rand.nextInt(4)));
+                w.dropItemNaturally(deathLocation, new ItemStack(Material.GLOW_INK_SAC, rand.nextInt(4)));
             } else{
-                w.dropItemNaturally(l, new ItemStack(Material.INK_SAC, rand.nextInt(4)));
+                w.dropItemNaturally(deathLocation, new ItemStack(Material.INK_SAC, rand.nextInt(4)));
             }
         }
         //ankleBowl death
         if (player.getUniqueId().toString().equals("f9f3cc81-df7e-4f99-ab6c-72967f526b51")){
-            w.dropItemNaturally(l, new ItemStack(Material.BOWL, rand.nextInt(4)));
+            w.dropItemNaturally(deathLocation, new ItemStack(Material.BOWL, rand.nextInt(4)));
         }
         //FruityMaybe death
         if (player.getUniqueId().toString().equals("2c1f5eaf-cc7e-4016-a836-05a81e300ca4")){
-            w.dropItemNaturally(l, new ItemStack(Material.APPLE, rand.nextInt(4)));
+            w.dropItemNaturally(deathLocation, new ItemStack(Material.APPLE, rand.nextInt(4)));
         }
     }
 
