@@ -359,20 +359,21 @@ public final class LukeSMPCore extends JavaPlugin implements Listener {
         Player player=event.getEntity().getPlayer();
         Location deathLocation = event.getEntity().getLocation();
         World w = event.getEntity().getWorld();
-        String deathMessage=event.getDeathMessage();
+        String deathMessage = event.getDeathMessage();
 
         //when player dies, update scoreboard and set player list name
         player.setPlayerListName(ChatColor.RED+player.getDisplayName()+ChatColor.RESET);
         player.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
 
-        if (player.getActivePotionEffects().contains(PotionEffectType.INVISIBILITY)) {
-
-        }
-
         if (event.getEntity().getKiller() != null){
             String killer=event.getEntity().getKiller().getDisplayName();
-            String deathMessage1=deathMessage.replace(player.getDisplayName(), ChatColor.RED+player.getDisplayName()+ChatColor.GRAY);
-            String deathMessage2=deathMessage1.replace(killer, ChatColor.GREEN+killer+ChatColor.GRAY);
+            String deathMessage1 = "";
+            if (player.getKiller().getActivePotionEffects().contains(PotionEffectType.INVISIBILITY)) {
+                deathMessage1 = deathMessage.replace(player.getDisplayName(), ChatColor.RED+player.getDisplayName()+ChatColor.GRAY);
+            } else {
+                deathMessage1 = deathMessage.replace(player.getDisplayName(), ChatColor.RED+player.getDisplayName()+ChatColor.GRAY);
+            }
+            String deathMessage2=deathMessage1.replace(killer, ChatColor.MAGIC + "------");
             String deathMessage3=deathMessage2.replace("[",ChatColor.AQUA+"[");
             event.setDeathMessage(ChatColor.DARK_AQUA+"Luke"+ChatColor.DARK_PURPLE+"SMP"+ChatColor.RESET+" "+ChatColor.GRAY+ChatColor.BOLD+ChatColor.MAGIC+"|"+ChatColor.RESET+" "+deathMessage3);
         } else{
