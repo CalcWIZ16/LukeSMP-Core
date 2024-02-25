@@ -29,14 +29,14 @@ public final class LukeSMPCore extends JavaPlugin implements Listener {
     public void onEnable() {
         // Plugin startup logic
         Bukkit.getPluginManager().registerEvents(this, this);
-    //        new WorldCreator("world1").createWorld();
-    //        new WorldCreator("world1_nether").environment(World.Environment.NETHER).createWorld();
-    //        new WorldCreator("world2").createWorld();
-    //        new WorldCreator("world2_nether").environment(World.Environment.NETHER).createWorld();
-    //        new WorldCreator("world3").createWorld();
-    //        new WorldCreator("world3_nether").environment(World.Environment.NETHER).createWorld();
-    //        new WorldCreator("world4").createWorld();
-    //        new WorldCreator("world4_nether").environment(World.Environment.NETHER).createWorld();
+        World world1 = new WorldCreator("world1").createWorld();
+        World world1Nether = new WorldCreator("world1_nether").environment(World.Environment.NETHER).createWorld();
+        World world2 = new WorldCreator("world2").createWorld();
+        World world2Nether = new WorldCreator("world2_nether").environment(World.Environment.NETHER).createWorld();
+        World world3 = new WorldCreator("world3").createWorld();
+        World world3Nether = new WorldCreator("world3_nether").environment(World.Environment.NETHER).createWorld();
+        World world4 = new WorldCreator("world4").createWorld();
+        World world4Nether = new WorldCreator("world4_nether").environment(World.Environment.NETHER).createWorld();
 
 //        File deaths = new File("plugins/LukeSMPCore/deaths.yml");
 //        if (!deaths.exists()) {
