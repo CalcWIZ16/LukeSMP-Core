@@ -359,30 +359,29 @@ public final class LukeSMPCore extends JavaPlugin implements Listener {
         player.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
 
         if (event.getEntity().getKiller() != null){
-            String killer=event.getEntity().getKiller().getDisplayName();
-            String deathMessage1 = "";
+            String killerString = event.getEntity().getKiller().getDisplayName();
+            deathMessage = deathMessage.replace(player.getDisplayName(), ChatColor.RED+player.getDisplayName()+ChatColor.GRAY);
             if (player.getKiller().hasPotionEffect(PotionEffectType.INVISIBILITY)) {
-                deathMessage1 = deathMessage.replace(player.getDisplayName(), ChatColor.RED+player.getDisplayName()+ChatColor.GRAY);
+                deathMessage = deathMessage.replace(killerString, ChatColor.MAGIC + "------");
+                if (deathMessage.contains("using")) {
+                    deathMessage = deathMessage.substring(0,deathMessage.indexOf(" using ["));
+                }
             } else {
-                deathMessage1 = deathMessage.replace(player.getDisplayName(), ChatColor.RED+player.getDisplayName()+ChatColor.GRAY);
+                deathMessage = deathMessage.replace(killerString, ChatColor.GREEN + killerString + ChatColor.GRAY);
+                deathMessage = deathMessage.replace("[",ChatColor.AQUA+"[");
             }
-            String deathMessage2=deathMessage1.replace(killer, ChatColor.MAGIC + "------");
-            String deathMessage3=deathMessage2.replace("[",ChatColor.AQUA+"[");
-            event.setDeathMessage(ChatColor.DARK_AQUA+"Luke"+ChatColor.DARK_PURPLE+"SMP"+ChatColor.RESET+" "+ChatColor.GRAY+ChatColor.BOLD+ChatColor.MAGIC+"|"+ChatColor.RESET+" "+deathMessage3);
-        } else{
-            String deathMessage1=deathMessage.replace(player.getDisplayName(), ChatColor.RED+player.getDisplayName()+ChatColor.GRAY);
-            String deathMessage2=deathMessage1.replace("[",ChatColor.AQUA+"[");
-            event.setDeathMessage(ChatColor.DARK_AQUA+"Luke"+ChatColor.DARK_PURPLE+"SMP"+ChatColor.RESET+" "+ChatColor.GRAY+ChatColor.BOLD+ChatColor.MAGIC+"|"+ChatColor.RESET+" "+deathMessage2);
         }
 
+        event.setDeathMessage(ChatColor.DARK_AQUA+"Luke"+ChatColor.DARK_PURPLE+"SMP"+ChatColor.RESET+" "+ChatColor.GRAY+ChatColor.BOLD+ChatColor.MAGIC+"|"+ChatColor.RESET+" "+deathMessage);
+
         //died on B
-        if((deathLocation.getBlockX() >= -521) && (deathLocation.getBlockX() <= -520)){
-            if((deathLocation.getBlockY() == 68)){
-                if((deathLocation.getBlockZ() >= -180) && (deathLocation.getBlockZ() <= -179)){
-                    event.setDeathMessage(ChatColor.DARK_AQUA+"Luke"+ChatColor.DARK_PURPLE+"SMP"+ChatColor.RESET+" "+ChatColor.GRAY+ChatColor.BOLD+ChatColor.MAGIC+"|"+ChatColor.RED+" "+player.getDisplayName()+ChatColor.GRAY+" recieved a JUG");
-                }
-            }
-        }
+//        if((deathLocation.getBlockX() >= -521) && (deathLocation.getBlockX() <= -520)){
+//            if((deathLocation.getBlockY() == 68)){
+//                if((deathLocation.getBlockZ() >= -180) && (deathLocation.getBlockZ() <= -179)){
+//                    event.setDeathMessage(ChatColor.DARK_AQUA+"Luke"+ChatColor.DARK_PURPLE+"SMP"+ChatColor.RESET+" "+ChatColor.GRAY+ChatColor.BOLD+ChatColor.MAGIC+"|"+ChatColor.RED+" "+player.getDisplayName()+ChatColor.GRAY+" recieved a JUG");
+//                }
+//            }
+//        }
 
         //CalcWIZ death
         if (player.getUniqueId().toString().equals("46257261-7468-4a8b-bb32-b7f5a78f7a0a")){
