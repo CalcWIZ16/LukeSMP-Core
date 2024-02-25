@@ -216,40 +216,6 @@ public final class LukeSMPCore extends JavaPlugin implements Listener {
         event.getWorld().setKeepSpawnInMemory(false);
     }
 
-    //world switcher
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (command.getName().equalsIgnoreCase("getworld")){
-            if (sender instanceof Player){
-                Player player = (Player) sender;
-                player.sendMessage(player.getWorld().getName());
-            }
-            return true;
-        }
-        if (command.getName().equalsIgnoreCase("world")) {
-            if (args.length == 0) {
-                sender.sendMessage(ChatColor.RED + "Please specify a world!");
-                return true;
-            }
-            if (args.length == 1) {
-                World world = Bukkit.getWorld(args[0]);
-                if (world == null) {
-                    sender.sendMessage(ChatColor.RED + "That world does not exist!");
-                    return true;
-                }
-                if (sender instanceof Player) {
-                    Player player = (Player) sender;
-                    player.teleport(world.getSpawnLocation());
-                    player.sendMessage(ChatColor.GREEN + "Teleported to " + world.getName());
-                    return true;
-                }
-                sender.sendMessage(ChatColor.RED + "You must be a player to use this command!");
-                return true;
-            }
-        }
-        return false;
-    }
-
     //world travel
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event){
@@ -348,40 +314,40 @@ public final class LukeSMPCore extends JavaPlugin implements Listener {
     //    }
 
     @EventHandler
-    public void playerDeathEvent(PlayerDeathEvent event){
-        Player player=event.getEntity().getPlayer();
+    public void playerDeathEvent(PlayerDeathEvent event) {
+        Player player = event.getEntity().getPlayer();
         Location deathLocation = event.getEntity().getLocation();
         World w = event.getEntity().getWorld();
         String deathMessage = event.getDeathMessage();
 
         //when player dies, update scoreboard and set player list name
-        player.setPlayerListName(ChatColor.RED+player.getDisplayName()+ChatColor.RESET);
+        player.setPlayerListName(ChatColor.RED + player.getDisplayName() + ChatColor.RESET);
         player.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
 
-        if (event.getEntity().getKiller() != null){
+        if (event.getEntity().getKiller() != null) {
             String killerString = event.getEntity().getKiller().getDisplayName();
-            deathMessage = deathMessage.replace(player.getDisplayName(), ChatColor.RED+player.getDisplayName()+ChatColor.GRAY);
+            deathMessage = deathMessage.replace(player.getDisplayName(), ChatColor.RED + player.getDisplayName() + ChatColor.GRAY);
             if (player.getKiller().hasPotionEffect(PotionEffectType.INVISIBILITY)) {
                 deathMessage = deathMessage.replace(killerString, ChatColor.MAGIC + "------");
                 if (deathMessage.contains("using")) {
-                    deathMessage = deathMessage.substring(0,deathMessage.indexOf(" using ["));
+                    deathMessage = deathMessage.substring(0, deathMessage.indexOf(" using ["));
                 }
             } else {
                 deathMessage = deathMessage.replace(killerString, ChatColor.GREEN + killerString + ChatColor.GRAY);
-                deathMessage = deathMessage.replace("[",ChatColor.AQUA+"[");
+                deathMessage = deathMessage.replace("[", ChatColor.AQUA + "[");
             }
         }
 
-        event.setDeathMessage(ChatColor.DARK_AQUA+"Luke"+ChatColor.DARK_PURPLE+"SMP"+ChatColor.RESET+" "+ChatColor.GRAY+ChatColor.BOLD+ChatColor.MAGIC+"|"+ChatColor.RESET+" "+deathMessage);
+        event.setDeathMessage(ChatColor.DARK_AQUA + "Luke" + ChatColor.DARK_PURPLE + "SMP" + ChatColor.RESET + " " + ChatColor.GRAY + ChatColor.BOLD + ChatColor.MAGIC + "|" + ChatColor.RESET + " " + deathMessage);
 
         //died on B
-//        if((deathLocation.getBlockX() >= -521) && (deathLocation.getBlockX() <= -520)){
-//            if((deathLocation.getBlockY() == 68)){
-//                if((deathLocation.getBlockZ() >= -180) && (deathLocation.getBlockZ() <= -179)){
-//                    event.setDeathMessage(ChatColor.DARK_AQUA+"Luke"+ChatColor.DARK_PURPLE+"SMP"+ChatColor.RESET+" "+ChatColor.GRAY+ChatColor.BOLD+ChatColor.MAGIC+"|"+ChatColor.RED+" "+player.getDisplayName()+ChatColor.GRAY+" recieved a JUG");
-//                }
-//            }
-//        }
+        if ((deathLocation.getBlockX() >= -521) && (deathLocation.getBlockX() <= -520)) {
+            if ((deathLocation.getBlockY() == 68)) {
+                if ((deathLocation.getBlockZ() >= -180) && (deathLocation.getBlockZ() <= -179)) {
+                    event.setDeathMessage(ChatColor.DARK_AQUA + "Luke" + ChatColor.DARK_PURPLE + "SMP" + ChatColor.RESET + " " + ChatColor.GRAY + ChatColor.BOLD + ChatColor.MAGIC + "|" + ChatColor.RED + " " + player.getDisplayName() + ChatColor.GRAY + " recieved a JUG");
+                }
+            }
+        }
 
         //CalcWIZ death
         if (player.getUniqueId().toString().equals("46257261-7468-4a8b-bb32-b7f5a78f7a0a")){
