@@ -9,8 +9,6 @@ commands:
   getworld:
     description: Get the world name of the player
     usage: /getworld
-    permission: lukesmpcore.getworld\
   world:
     description: Teleport to a world
-    usage: /world <world
-    permission: lukesmpcore.world
+    usage: /world <world>

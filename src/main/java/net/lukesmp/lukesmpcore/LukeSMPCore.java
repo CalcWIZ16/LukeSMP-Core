@@ -29,6 +29,9 @@ public final class LukeSMPCore extends JavaPlugin implements Listener {
     public void onEnable() {
         // Plugin startup logic
         Bukkit.getPluginManager().registerEvents(this, this);
+        this.getCommand("world").setExecutor(new LukeSMPCommand());
+        this.getCommand("getworld").setExecutor(new LukeSMPCommand());
+
         World world1 = new WorldCreator("world1").createWorld();
         World world1Nether = new WorldCreator("world1_nether").environment(World.Environment.NETHER).createWorld();
         World world2 = new WorldCreator("world2").createWorld();
