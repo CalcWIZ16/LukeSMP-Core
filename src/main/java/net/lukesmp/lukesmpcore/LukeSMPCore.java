@@ -28,7 +28,8 @@ public final class LukeSMPCore extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         // Plugin startup logic
-        Bukkit.getPluginManager().registerEvents(this, this);
+        Bukkit.getPluginManager().registerEvents(new LukeSMPEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new LukeSMPWorldSpecificEvent(), this);
         this.getCommand("world").setExecutor(new LukeSMPCommand());
         this.getCommand("getworld").setExecutor(new LukeSMPCommand());
 
