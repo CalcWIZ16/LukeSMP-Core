@@ -14,7 +14,7 @@ public class LukeSMPCommand implements CommandExecutor {
         if (command.getName().equalsIgnoreCase("getworld")){
             if (sender instanceof Player){
                 Player player = (Player) sender;
-                player.sendMessage(player.getWorld().getName());
+                player.sendMessage(player.getWorld().getName().toString());
             }
             return true;
         }
