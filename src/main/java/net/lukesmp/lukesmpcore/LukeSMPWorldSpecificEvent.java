@@ -13,7 +13,6 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerPortalEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
-import org.bukkit.util.Vector;
 
 public class LukeSMPWorldSpecificEvent implements Listener {
     @EventHandler
@@ -25,44 +24,28 @@ public class LukeSMPWorldSpecificEvent implements Listener {
                 event.getTo().setWorld(Bukkit.getWorld(world.getName()+"_nether"));
             }
             if (world.getEnvironment()==World.Environment.NETHER) {
-                if (world==Bukkit.getWorld("world1_nether")) {
-                    event.getTo().setWorld(Bukkit.getWorld("world1"));
+                if (world==Bukkit.getWorld("s1world_nether")) {
+                    event.getTo().setWorld(Bukkit.getWorld("s1world"));
                 }
-                else if (world==Bukkit.getWorld("world2_nether")) {
-                    event.getTo().setWorld(Bukkit.getWorld("world2"));
+                else if (world==Bukkit.getWorld("s2world_nether")) {
+                    event.getTo().setWorld(Bukkit.getWorld("s2world"));
                 }
-                else if (world==Bukkit.getWorld("world3_nether")) {
-                    event.getTo().setWorld(Bukkit.getWorld("world3"));
+                else if (world==Bukkit.getWorld("s3world_nether")) {
+                    event.getTo().setWorld(Bukkit.getWorld("s3world"));
                 }
-                else if (world==Bukkit.getWorld("world4_nether")) {
-                    event.getTo().setWorld(Bukkit.getWorld("world4"));
+                else if (world==Bukkit.getWorld("s4world_nether")) {
+                    event.getTo().setWorld(Bukkit.getWorld("s4world"));
                 }
             }
-        }
-        else if (event.getCause() == PlayerTeleportEvent.TeleportCause.END_PORTAL) {
-            //position of portal + teleport logic
-            if (world==Bukkit.getWorld("world")) {
-
-            }
-            else {
-                event.getTo().setWorld(Bukkit.getWorld("world"));
-                event.getTo().setX(165.5);
-                event.getTo().setY(120);
-                event.getTo().setZ(108.5);
-            }
-
-            Vector world1Portal = new Vector(0, 0, 0);
-            Vector world2Portal = new Vector(0, 0, 0);
-            Vector world3Portal = new Vector(0, 0, 0);
-            Vector world4Portal = new Vector(0, 0, 0);
-
         }
     }
+
+    //death on B
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event){
         Player player=event.getPlayer();
         Location loc=player.getLocation();
-        if((loc.getWorld()==Bukkit.getWorld("s4world"))){
+        if((loc.getWorld()==Bukkit.getWorld("world4"))){
             if((loc.getBlockX() >= -521) && (player.getLocation().getBlockX() <= -520)){
                 if((loc.getBlockY() == 68)){
                     if((loc.getBlockZ() >= -180) && (player.getLocation().getBlockZ() <= -179)){
@@ -73,6 +56,7 @@ public class LukeSMPWorldSpecificEvent implements Listener {
         }
     }
 
+    //spawn pillars protection
     @EventHandler
     public void onBlockBreakEvent(BlockBreakEvent event) {
         if (event.getBlock().getType() == Material.OBSIDIAN || event.getBlock().getType() == Material.DEEPSLATE_BRICKS || event.getBlock().getType() == Material.CRACKED_DEEPSLATE_BRICKS) {

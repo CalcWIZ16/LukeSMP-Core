@@ -8,6 +8,10 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 public final class LukeSMPCore extends JavaPlugin implements Listener {
 
     @Override
@@ -19,14 +23,14 @@ public final class LukeSMPCore extends JavaPlugin implements Listener {
         this.getCommand("world").setExecutor(new LukeSMPCommand());
         this.getCommand("getworld").setExecutor(new LukeSMPCommand());
 
-        World world1 = new WorldCreator("world1").createWorld();
-        World world1Nether = new WorldCreator("world1_nether").environment(World.Environment.NETHER).createWorld();
-        World world2 = new WorldCreator("world2").createWorld();
-        World world2Nether = new WorldCreator("world2_nether").environment(World.Environment.NETHER).createWorld();
-        World world3 = new WorldCreator("world3").createWorld();
-        World world3Nether = new WorldCreator("world3_nether").environment(World.Environment.NETHER).createWorld();
-        World world4 = new WorldCreator("world4").createWorld();
-        World world4Nether = new WorldCreator("world4_nether").environment(World.Environment.NETHER).createWorld();
+        World world1 = new WorldCreator("s1world").createWorld();
+        World world1Nether = new WorldCreator("s1world_nether").environment(World.Environment.NETHER).createWorld();
+        World world2 = new WorldCreator("s2world").createWorld();
+        World world2Nether = new WorldCreator("s2world_nether").environment(World.Environment.NETHER).createWorld();
+        World world3 = new WorldCreator("s3world").createWorld();
+        World world3Nether = new WorldCreator("s3world_nether").environment(World.Environment.NETHER).createWorld();
+        World world4 = new WorldCreator("s4world").createWorld();
+        World world4Nether = new WorldCreator("s4world_nether").environment(World.Environment.NETHER).createWorld();
 
 //        File deaths = new File("plugins/LukeSMPCore/deaths.yml");
 //        if (!deaths.exists()) {
@@ -44,7 +48,7 @@ public final class LukeSMPCore extends JavaPlugin implements Listener {
     }
 
     @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event){
+    public void onPlayerJoin(PlayerJoinEvent event) throws IOException {
         Player player=event.getPlayer();
 
         //tab header/footer
