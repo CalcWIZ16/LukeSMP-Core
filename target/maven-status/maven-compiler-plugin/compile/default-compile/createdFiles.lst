@@ -1,10 +1,11 @@
+net/lukesmp/lukesmpcore/LukeSMPCore$1.class
+net/lukesmp/lukesmpcore/LukeSMPWorldSpecificEvent.class
+net/lukesmp/lukesmpcore/LukeSMPCore$3.class
 net/lukesmp/lukesmpcore/LukeSMPCommand.class
 net/lukesmp/lukesmpcore/LukeSMPCore$4.class
-net/lukesmp/lukesmpcore/LukeSMPCore$1.class
+net/lukesmp/lukesmpcore/TransOrbisEvent$1.class
 net/lukesmp/lukesmpcore/LukeSMPCore$5.class
-net/lukesmp/lukesmpcore/LukeSMPWorldSpecificEvent.class
 net/lukesmp/lukesmpcore/TransOrbisEvent.class
-net/lukesmp/lukesmpcore/LukeSMPCore$3.class
 net/lukesmp/lukesmpcore/LukeSMPCore$2.class
 net/lukesmp/lukesmpcore/LukeSMPEvent.class
 net/lukesmp/lukesmpcore/LukeSMPCore.class

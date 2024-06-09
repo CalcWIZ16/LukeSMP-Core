@@ -1,9 +1,6 @@
 package net.lukesmp.lukesmpcore;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -11,8 +8,16 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerPortalEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class TransOrbisEvent implements Listener {
+
+    public final LukeSMPCore plugin;
+
+    public TransOrbisEvent(LukeSMPCore plugin) {
+        this.plugin = plugin;
+    }
 
     @EventHandler
     public void playerPortalEvent(PlayerPortalEvent event) {
@@ -62,6 +67,20 @@ public class TransOrbisEvent implements Listener {
                 }
             }
         }
+    }
+
+    private void transport(Player player, World destinationWorld) {
+        player.addPotionEffect(PotionEffectType.LEVITATION.createEffect(5,10));
+        for (int i = 0; i < 10; i++) {
+            player.getWorld().spawnParticle(org.bukkit.Particle.PORTAL, player.getLocation(), 10);
+        }
+        player.teleport(destinationWorld.getSpawnLocation().add(0,100,0));
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                player.addPotionEffect(PotionEffectType.SLOW_FALLING.createEffect(5,10));
+            }
+        }.runTaskLater(plugin, 100);
     }
 
     private boolean unlockCheck(Block keyLocation, Material baseBlock) {
