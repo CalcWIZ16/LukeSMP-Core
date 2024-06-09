@@ -15,41 +15,17 @@ import org.bukkit.event.player.PlayerPortalEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 
 public class LukeSMPWorldSpecificEvent implements Listener {
-    @EventHandler
-    public void playerPortalEvent(PlayerPortalEvent event) {
-        Player player = event.getPlayer();
-        World world = player.getWorld();
-        if (event.getCause() == PlayerTeleportEvent.TeleportCause.NETHER_PORTAL) {
-            if (world.getEnvironment()==World.Environment.NORMAL) {
-                event.getTo().setWorld(Bukkit.getWorld(world.getName()+"_nether"));
-            }
-            if (world.getEnvironment()==World.Environment.NETHER) {
-                if (world==Bukkit.getWorld("s1world_nether")) {
-                    event.getTo().setWorld(Bukkit.getWorld("s1world"));
-                }
-                else if (world==Bukkit.getWorld("s2world_nether")) {
-                    event.getTo().setWorld(Bukkit.getWorld("s2world"));
-                }
-                else if (world==Bukkit.getWorld("s3world_nether")) {
-                    event.getTo().setWorld(Bukkit.getWorld("s3world"));
-                }
-                else if (world==Bukkit.getWorld("s4world_nether")) {
-                    event.getTo().setWorld(Bukkit.getWorld("s4world"));
-                }
-            }
-        }
-    }
 
-    //death on B
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event){
-        Player player=event.getPlayer();
-        Location loc=player.getLocation();
-        if((loc.getWorld()==Bukkit.getWorld("world4"))){
-            if((loc.getBlockX() >= -521) && (player.getLocation().getBlockX() <= -520)){
-                if((loc.getBlockY() == 68)){
-                    if((loc.getBlockZ() >= -180) && (player.getLocation().getBlockZ() <= -179)){
-                        player.setHealth(0);
+        Location location = event.getPlayer().getLocation();
+
+        //kill player on B
+        if(location.getWorld() == Bukkit.getWorld("world4")){
+            if((location.getBlockX() >= -521) && (location.getBlockX() <= -520)){
+                if((location.getBlockY() == 68)){
+                    if((location.getBlockZ() >= -180) && (location.getBlockZ() <= -179)){
+                        event.getPlayer().setHealth(0);
                     }
                 }
             }

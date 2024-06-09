@@ -9,8 +9,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 public final class LukeSMPCore extends JavaPlugin implements Listener {
 
@@ -20,6 +18,8 @@ public final class LukeSMPCore extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(this, this);
         Bukkit.getPluginManager().registerEvents(new LukeSMPEvent(), this);
         Bukkit.getPluginManager().registerEvents(new LukeSMPWorldSpecificEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new TransOrbisEvent(), this);
+
         this.getCommand("world").setExecutor(new LukeSMPCommand());
         this.getCommand("getworld").setExecutor(new LukeSMPCommand());
 
@@ -31,15 +31,6 @@ public final class LukeSMPCore extends JavaPlugin implements Listener {
         World world3Nether = new WorldCreator("s3world_nether").environment(World.Environment.NETHER).createWorld();
         World world4 = new WorldCreator("s4world").createWorld();
         World world4Nether = new WorldCreator("s4world_nether").environment(World.Environment.NETHER).createWorld();
-
-//        File deaths = new File("plugins/LukeSMPCore/deaths.yml");
-//        if (!deaths.exists()) {
-//            try {
-//                deaths.createNewFile();
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
-//        }
     }
 
     @Override
@@ -59,6 +50,10 @@ public final class LukeSMPCore extends JavaPlugin implements Listener {
         event.setJoinMessage(ChatColor.DARK_AQUA+"Luke"+ChatColor.DARK_PURPLE+"SMP"+ChatColor.RESET+" "+ChatColor.GRAY+ChatColor.BOLD+ChatColor.MAGIC+"|"+ChatColor.RESET+" "+ChatColor.RESET+ChatColor.GREEN+player.getDisplayName()+ChatColor.GRAY+" has joined");
 
         //title at join
+        joinTitle(player);
+    }
+
+    private void joinTitle(Player player) {
         int random = (int) (Math.random() * 5);
         if (random==2){
             player.sendTitle(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"Lucy"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season 5");
