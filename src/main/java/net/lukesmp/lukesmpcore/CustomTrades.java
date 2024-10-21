@@ -10,6 +10,7 @@ import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.MerchantInventory;
 import org.bukkit.inventory.MerchantRecipe;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CustomTrades implements Listener {
@@ -27,7 +28,7 @@ public class CustomTrades implements Listener {
                 return;
             }
 
-            List<MerchantRecipe> recipes = merchant.getRecipes();
+            List<MerchantRecipe> recipes = new ArrayList<>(merchant.getRecipes());
             boolean customRecipeExists = false;
             for(MerchantRecipe recipe : recipes) {
                 if(recipe.getResult().getType() == Material.END_STONE && recipe.getResult().getAmount() == 8) {
