@@ -22,6 +22,11 @@ public class CustomTrades implements Listener {
             MerchantInventory inventory = (MerchantInventory) event.getInventory();
             Merchant merchant = inventory.getMerchant();
 
+            ArrayList<MerchantRecipe> newRecipes = new ArrayList<>();
+            for(MerchantRecipe recipe : merchant.getRecipes()) {
+                newRecipes.add(recipe);
+            }
+
             if(inventory.getHolder() == null) {
                 return;
             }
@@ -29,9 +34,9 @@ public class CustomTrades implements Listener {
             MerchantRecipe firstCustomRecipe = new MerchantRecipe(new ItemStack(Material.END_STONE, 8), 8);
             firstCustomRecipe.addIngredient(new ItemStack(Material.EMERALD, 1));
 
+            newRecipes.add(firstCustomRecipe);
 
-            merchant.setRecipe(merchant.getRecipeCount()-1, firstCustomRecipe);
-
+            merchant.setRecipes(newRecipes);
 
         }
     }
