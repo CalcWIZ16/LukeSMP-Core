@@ -43,8 +43,9 @@ public class CustomTrades implements Listener {
 
                 MerchantRecipe secondCustomRecipe = new MerchantRecipe(new ItemStack(Material.CHORUS_FLOWER, 1), 8);
                 secondCustomRecipe.addIngredient(new ItemStack(Material.EMERALD, 5));
-                
+
                 recipes.add(firstCustomRecipe);
+                recipes.add(secondCustomRecipe);
                 merchant.setRecipes(recipes);
             }
         }
