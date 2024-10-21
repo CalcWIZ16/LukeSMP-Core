@@ -29,17 +29,21 @@ public class CustomTrades implements Listener {
             }
 
             List<MerchantRecipe> recipes = new ArrayList<>(merchant.getRecipes());
-            boolean customRecipeExists = false;
+            boolean customRecipesExists = false;
             for(MerchantRecipe recipe : recipes) {
                 if(recipe.getResult().getType() == Material.END_STONE && recipe.getResult().getAmount() == 8) {
-                    customRecipeExists = true;
+                    customRecipesExists = true;
                     break;
                 }
             }
 
-            if (!customRecipeExists) {
+            if (!customRecipesExists) {
                 MerchantRecipe firstCustomRecipe = new MerchantRecipe(new ItemStack(Material.END_STONE, 8), 8);
                 firstCustomRecipe.addIngredient(new ItemStack(Material.EMERALD, 1));
+
+                MerchantRecipe secondCustomRecipe = new MerchantRecipe(new ItemStack(Material.CHORUS_FLOWER, 1), 8);
+                secondCustomRecipe.addIngredient(new ItemStack(Material.EMERALD, 5));
+                
                 recipes.add(firstCustomRecipe);
                 merchant.setRecipes(recipes);
             }
