@@ -56,7 +56,7 @@ public final class LukeSMPCore extends JavaPlugin implements Listener {
 
     private void joinTitle(Player player) {
         int random = (int) (Math.random() * 6);
-        if (random==5){
+        if (random==3){
             player.sendTitle(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"Lucy"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season V");
             new BukkitRunnable() {
                 @Override
