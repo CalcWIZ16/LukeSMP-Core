@@ -17,9 +17,6 @@ public class CustomTrades implements Listener {
 
     @EventHandler
     public void onInventoryOpen(InventoryOpenEvent event) {
-        Bukkit.getConsoleSender().sendMessage("Inventory opened");
-
-
         if(event.getInventory() instanceof MerchantInventory) {
             MerchantInventory inventory = (MerchantInventory) event.getInventory();
             Merchant merchant = inventory.getMerchant();
