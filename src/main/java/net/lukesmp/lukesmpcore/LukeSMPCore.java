@@ -19,6 +19,7 @@ public final class LukeSMPCore extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(new LukeSMPEvent(), this);
         Bukkit.getPluginManager().registerEvents(new LukeSMPWorldSpecificEvent(), this);
         Bukkit.getPluginManager().registerEvents(new TransOrbisEvent(this), this);
+        Bukkit.getPluginManager().registerEvents(new CustomTrades(), this);
 
         this.getCommand("world").setExecutor(new LukeSMPCommand());
         this.getCommand("getworld").setExecutor(new LukeSMPCommand());
