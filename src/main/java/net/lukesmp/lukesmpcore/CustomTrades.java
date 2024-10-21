@@ -30,7 +30,7 @@ public class CustomTrades implements Listener {
             firstCustomRecipe.addIngredient(new ItemStack(Material.EMERALD, 1));
 
 
-            merchant.setRecipe(merchant.getRecipeCount(), firstCustomRecipe);
+            merchant.setRecipe(merchant.getRecipeCount()-1, firstCustomRecipe);
 
 
         }
