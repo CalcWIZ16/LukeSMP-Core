@@ -53,21 +53,21 @@ public class TransOrbisEvent implements Listener {
             if (-1043 <= location.getBlockX() && location.getBlockX() <= -1037) {
                 if (819 <= location.getBlockZ() && location.getBlockZ() <= 825) {
                     //south pillar (season 1 portal)
-                    transport(event.getPlayer(), Bukkit.getWorld("s1world"));
+//                    transport(event.getPlayer(), Bukkit.getWorld("s1world"));
                 }
                 if (699 <= location.getBlockZ() && location.getBlockZ() <= 705) {
                     //north pillar (season 3 portal)
-                    transport(event.getPlayer(), Bukkit.getWorld("s3world"));
+//                    transport(event.getPlayer(), Bukkit.getWorld("s3world"));
                 }
             }
             if (759 <= location.getBlockZ() && location.getBlockZ() <= 765) {
                 if (-1103 <= location.getBlockX() && location.getBlockX() <= -1097) {
                     //west pillar (season 2 portal)
-                    transport(event.getPlayer(), Bukkit.getWorld("s2world"));
+//                    transport(event.getPlayer(), Bukkit.getWorld("s2world"));
                 }
                 if (-983 <= location.getBlockX() && location.getBlockX() <= -977) {
                     //east pillar (season 4 portal)
-                    transport(event.getPlayer(), Bukkit.getWorld("s4world"));
+//                    transport(event.getPlayer(), Bukkit.getWorld("s4world"));
                 }
             }
         }
