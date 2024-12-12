@@ -11,12 +11,16 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.ArrayList;
+
 public class TransOrbisEvent implements Listener {
 
     public final LukeSMPCore plugin;
+    private ArrayList<Player> playersInTrasit = new ArrayList<>();
 
     public TransOrbisEvent(LukeSMPCore plugin) {
         this.plugin = plugin;
+        startAsyncPositionDetection();
     }
 
     @EventHandler
@@ -44,58 +48,71 @@ public class TransOrbisEvent implements Listener {
         }
     }
 
-    @EventHandler
-    public void playerMoveEvent(PlayerMoveEvent event) {
-        Location location = event.getPlayer().getLocation();
-
-        //portal pillars
-        if (location.getWorld() == Bukkit.getWorld("world")) {
-            if (-1043 <= location.getBlockX() && location.getBlockX() <= -1037) {
-                if (819 <= location.getBlockZ() && location.getBlockZ() <= 825) {
-                    //south pillar (season 1 portal)
-//                    transport(event.getPlayer(), Bukkit.getWorld("s1world"));
-                }
-                if (699 <= location.getBlockZ() && location.getBlockZ() <= 705) {
-                    //north pillar (season 3 portal)
+    private void startAsyncPositionDetection() {
+        Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, () -> {
+            for(Player player : Bukkit.getOnlinePlayers()) {
+                Location location = player.getLocation();
+                if (location.getWorld() == Bukkit.getWorld("world")) {
+                    if (location.getWorld() == Bukkit.getWorld("world")) {
+                        if (-1043 <= location.getBlockX() && location.getBlockX() <= -1037) {
+                            if (819 <= location.getBlockZ() && location.getBlockZ() <= 825) {
+                                //south pillar (season 1 portal)
+//                                transport(event.getPlayer(), Bukkit.getWorld("s1world"));
+                            }
+                            if (699 <= location.getBlockZ() && location.getBlockZ() <= 705) {
+                                //north pillar (season 3 portal)
 //                    transport(event.getPlayer(), Bukkit.getWorld("s3world"));
-                }
-            }
-            if (759 <= location.getBlockZ() && location.getBlockZ() <= 765) {
-                if (-1103 <= location.getBlockX() && location.getBlockX() <= -1097) {
-                    //west pillar (season 2 portal)
+                            }
+                        }
+                        if (759 <= location.getBlockZ() && location.getBlockZ() <= 765) {
+                            if (-1103 <= location.getBlockX() && location.getBlockX() <= -1097) {
+                                //west pillar (season 2 portal)
 //                    transport(event.getPlayer(), Bukkit.getWorld("s2world"));
-                }
-                if (-983 <= location.getBlockX() && location.getBlockX() <= -977) {
-                    //east pillar (season 4 portal)
+                            }
+                            if (-983 <= location.getBlockX() && location.getBlockX() <= -977) {
+                                //east pillar (season 4 portal)
 //                    transport(event.getPlayer(), Bukkit.getWorld("s4world"));
+                            }
+                        }
+                    }
                 }
             }
-        }
-    }
+        }, 0L, 20L);
+    };
 
     /**
      * trans-orbis transportation and animation logic
      */
     private void transport(Player player, World destinationWorld) {
-        player.addPotionEffect(PotionEffectType.LEVITATION.createEffect(-1,10));
-//        for (int i = 0; i < 10; i++) {
-//            player.getWorld().spawnParticle(org.bukkit.Particle.PORTAL, player.getLocation(), 10);
-//        }
         new BukkitRunnable() {
             @Override
             public void run() {
                 player.teleport(destinationWorld.getSpawnLocation().add(0,20,0));
-                boolean onGround = false;
-                player.removePotionEffect(PotionEffectType.LEVITATION);
-                player.addPotionEffect(PotionEffectType.SLOW_FALLING.createEffect(-1,10));
-                while(!onGround) {
-                    if(player.isOnGround()){
-                        player.removePotionEffect(PotionEffectType.SLOW_FALLING);
-                        onGround = true;
-                    }
-                }
             }
-        }.runTaskLater(plugin, 100);
+        }.runTaskLater(plugin, 40L);
+//        player.teleport(destinationWorld.getSpawnLocation().add(0,20,0));
+//        player.addPotionEffect(PotionEffectType.LEVITATION.createEffect(-1,10));
+//        for (int i = 0; i < 10; i++) {
+//            player.getWorld().spawnParticle(org.bukkit.Particle.PORTAL, player.getLocation(), 10);
+//        }
+//        player.teleport(destinationWorld.getSpawnLocation().add(0,20,0));
+//        boolean onGround = false;
+//        player.removePotionEffect(PotionEffectType.LEVITATION);
+//        player.addPotionEffect(PotionEffectType.SLOW_FALLING.createEffect(-1,10));
+//        while(!onGround) {
+//            if(player.isOnGround()){
+//                player.removePotionEffect(PotionEffectType.SLOW_FALLING);
+//                onGround = true;
+//            }
+//        }
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                player.teleport(player.getLocation().add(0,10,0));
+            }
+        }.runTaskLater(plugin, 40);
+
 
 //        new BukkitRunnable() {
 //            @Override
