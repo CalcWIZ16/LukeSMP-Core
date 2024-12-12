@@ -97,35 +97,35 @@ public class TransOrbisEvent implements Listener {
             @Override
             public void run() {
                 player.teleport(destinationWorld.getSpawnLocation().add(0,20,0));
-                boolean onGround = false;
-                player.addPotionEffect(PotionEffectType.SLOW_FALLING.createEffect(-1,10));
-                while(!onGround) {
-                    if(player.isOnGround()){
-                        player.removePotionEffect(PotionEffectType.SLOW_FALLING);
-                        onGround = true;
-                    }
-                }
+                player.addPotionEffect(PotionEffectType.SLOW_FALLING.createEffect(100,0));
+                playersInTransit.remove(player.getUniqueId());
             }
         }.runTaskLater(plugin, 40L);
 
-        player.setVelocity(new Vector(0, 15, 0));
-        for(int i = 0; i < 40; i++) {
+        player.setVelocity(new Vector(0, 20, 0));
+
+//        for(int i = 0; i < 40; i++) {
+//            new BukkitRunnable() {
+//                @Override
+//                public void run() {
+//                    player.spawnParticle(Particle.FIREWORKS_SPARK, player.getLocation(), 10);
+//                }
+//            }.runTaskLater(plugin, i);
+//        }
+
+        for(int i = 0; i < 60; i++) {
+            int t = i;
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    player.spawnParticle(Particle.FIREWORKS_SPARK, player.getLocation(), 10);
+                    double sine = (Math.sin(t/3.0)*3);
+                    double cosine = (Math.cos(t/3.0)*3);
+                    player.getWorld().spawnParticle(Particle.HEART, player.getLocation().add(sine, 0, cosine), 1);
+                    player.getWorld().spawnParticle(Particle.HEART, player.getLocation().add(-sine, 0, -cosine), 1);
+                    player.getWorld().spawnParticle(Particle.HEART, player.getLocation().add(cosine, 0, sine), 1);
+                    player.getWorld().spawnParticle(Particle.HEART, player.getLocation().add(-cosine, 0, -sine), 1);
                 }
-            }.runTaskLater(plugin, i);
-        }
-
-        for(int i = 0; i < 120; i++) {
-            Location playerLoc = player.getLocation();
-            double t = i * Math.PI / 10;
-            double x = Math.sin(t)*3 + playerLoc.getX();
-            double z = Math.cos(t)*3 + playerLoc.getZ();
-            Location loc = player.getLocation().add(x, playerLoc.getY(), z);
-            destinationWorld.spawnParticle(Particle.FIREWORKS_SPARK, loc, 1);
-
+            }.runTaskLaterAsynchronously(plugin, t*2);
         }
     }
 
