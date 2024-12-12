@@ -7,6 +7,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerPortalEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
@@ -91,27 +93,40 @@ public class TransOrbisEvent implements Listener {
     private void transport(Player player, World destinationWorld) {
         playersInTransit.add(player.getUniqueId());
 
-//        new BukkitRunnable() {
-//            @Override
-//            public void run() {
-//                player.teleport(destinationWorld.getSpawnLocation().add(0,20,0));
-//            }
-//        }.runTaskLater(plugin, 40L);
-//        player.addPotionEffect(PotionEffectType.LEVITATION.createEffect(-1,10));
-        player.setVelocity(new Vector(0, 10, 0));
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                player.teleport(destinationWorld.getSpawnLocation().add(0,20,0));
+                boolean onGround = false;
+                player.addPotionEffect(PotionEffectType.SLOW_FALLING.createEffect(-1,10));
+                while(!onGround) {
+                    if(player.isOnGround()){
+                        player.removePotionEffect(PotionEffectType.SLOW_FALLING);
+                        onGround = true;
+                    }
+                }
+            }
+        }.runTaskLater(plugin, 40L);
 
-        for (int i = 0; i < 10; i++) {
-            player.getWorld().spawnParticle(org.bukkit.Particle.PORTAL, player.getLocation(), 10);
+        player.setVelocity(new Vector(0, 15, 0));
+        for(int i = 0; i < 40; i++) {
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    player.spawnParticle(Particle.FIREWORKS_SPARK, player.getLocation(), 10);
+                }
+            }.runTaskLater(plugin, i);
         }
-//        boolean onGround = false;
-//        player.removePotionEffect(PotionEffectType.LEVITATION);
-//        player.addPotionEffect(PotionEffectType.SLOW_FALLING.createEffect(-1,10));
-//        while(!onGround) {
-//            if(player.isOnGround()){
-//                player.removePotionEffect(PotionEffectType.SLOW_FALLING);
-//                onGround = true;
-//            }
-//        }
+
+        for(int i = 0; i < 120; i++) {
+            Location playerLoc = player.getLocation();
+            double t = i * Math.PI / 10;
+            double x = Math.sin(t)*3 + playerLoc.getX();
+            double z = Math.cos(t)*3 + playerLoc.getZ();
+            Location loc = player.getLocation().add(x, playerLoc.getY(), z);
+            destinationWorld.spawnParticle(Particle.FIREWORKS_SPARK, loc, 1);
+
+        }
     }
 
     private boolean unlockCheck(Block keyLocation, Material baseBlock) {
