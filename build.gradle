@@ -28,8 +28,7 @@ repositories {
 
 dependencies {
 //    compileOnly libs.org.spigotmc.spigot.api
-//    compileOnly 'io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT'
-    compileOnly("io.papermc.paper:paper-api:1.21.3-R0.1-SNAPSHOT")
+    compileOnly 'io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT'
 }
 
 def targetJavaVersion = 21
@@ -50,11 +49,11 @@ tasks.withType(JavaCompile).configureEach {
     }
 }
 
-processResources {
-    def props = [version: version]
-    inputs.properties props
-    filteringCharset 'UTF-8'
-    filesMatching('paper-plugin.yml') {
-        expand props
-    }
-}
+//processResources {
+//    def props = [version: version]
+//    inputs.properties props
+//    filteringCharset 'UTF-8'
+//    filesMatching('paper-plugin.yml') {
+//        expand props
+//    }
+//}
