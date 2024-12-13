@@ -1,12 +1,16 @@
 package net.lukesmp.lukesmpcore;
 
-import org.bukkit.Bukkit;
+
+
 import org.bukkit.Material;
 import org.bukkit.entity.WanderingTrader;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryOpenEvent;
-import org.bukkit.inventory.*;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Merchant;
+import org.bukkit.inventory.MerchantInventory;
+import org.bukkit.inventory.MerchantRecipe;
 
 import java.util.ArrayList;
 import java.util.List;

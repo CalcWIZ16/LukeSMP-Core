@@ -3,46 +3,58 @@
  */
 
 plugins {
-    id 'java-library'
+    id 'java'
+//    id 'java-library'
 //    id 'maven-publish'
-}
-
-repositories {
-    mavenLocal()
-    maven {
-        url = uri('https://hub.spigotmc.org/nexus/content/repositories/snapshots/')
-    }
-
-    maven {
-        url = uri('https://oss.sonatype.org/content/groups/public/')
-    }
-
-    maven {
-        url = uri('https://repo.maven.apache.org/maven2/')
-    }
-}
-
-dependencies {
-    compileOnly libs.org.spigotmc.spigot.api
 }
 
 group = 'net.lukesmp'
 version = '5.8'
-description = 'LukeSMPCore'
-java.sourceCompatibility = JavaVersion.VERSION_1_8
 
-//publishing {
-//    publications {
-//        maven(MavenPublication) {
-//            from(components.java)
-//        }
+repositories {
+    mavenCentral()
+    maven {
+        name = "papermc-repo"
+        url = "https://repo.papermc.io/repository/maven-public/"
+    }
+    maven {
+        name = "sonatype"
+        url = "https://oss.sonatype.org/content/groups/public/"
+    }
+//    maven {
+//        url = uri('https://hub.spigotmc.org/nexus/content/repositories/snapshots/')
 //    }
-//}
-
-tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
 }
 
-tasks.withType(Javadoc) {
+dependencies {
+//    compileOnly libs.org.spigotmc.spigot.api
+//    compileOnly 'io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT'
+    compileOnly("io.papermc.paper:paper-api:1.21.3-R0.1-SNAPSHOT")
+}
+
+def targetJavaVersion = 21
+java {
+    def javaVersion = JavaVersion.toVersion(targetJavaVersion)
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaVersion
+    if (JavaVersion.current() < javaVersion) {
+        toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
+
+    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
+        options.release.set(targetJavaVersion)
+    }
+}
+
+processResources {
+    def props = [version: version]
+    inputs.properties props
+    filteringCharset 'UTF-8'
+    filesMatching('paper-plugin.yml') {
+        expand props
+    }
 }
