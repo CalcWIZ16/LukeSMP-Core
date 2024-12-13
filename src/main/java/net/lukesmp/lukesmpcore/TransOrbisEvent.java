@@ -102,7 +102,7 @@ public class TransOrbisEvent implements Listener {
             }
         }.runTaskLater(plugin, 40L);
 
-        player.getWorld().spawnParticle(Particle.GUST, player.getLocation(), 1);
+        player.getWorld().spawnParticle(Particle.GUST_EMITTER_LARGE, player.getLocation(), 1);
         player.setVelocity(new Vector(0, 20, 0));
 
 //        for(int i = 0; i < 40; i++) {
@@ -121,10 +121,10 @@ public class TransOrbisEvent implements Listener {
                 public void run() {
                     double sine = (Math.sin(t/4.0)*3);
                     double cosine = (Math.cos(t/4.0)*3);
-                    player.getWorld().spawnParticle(Particle.HEART, player.getLocation().add(sine, 0, cosine), 1);
-                    player.getWorld().spawnParticle(Particle.HEART, player.getLocation().add(-sine, 0, -cosine), 1);
-                    player.getWorld().spawnParticle(Particle.HEART, player.getLocation().add(cosine, 0, sine), 1);
-                    player.getWorld().spawnParticle(Particle.HEART, player.getLocation().add(-cosine, 0, -sine), 1);
+                    player.getWorld().spawnParticle(Particle.HEART, player.getLocation().add(sine, 0, cosine), 100);
+                    player.getWorld().spawnParticle(Particle.FIREWORK, player.getLocation().add(-sine, 0, -cosine), 100);
+                    player.getWorld().spawnParticle(Particle.FIREWORK, player.getLocation().add(cosine, 0, sine), 1);
+                    player.getWorld().spawnParticle(Particle.FIREWORK, player.getLocation().add(-cosine, 0, -sine), 1);
                 }
             }.runTaskLaterAsynchronously(plugin, t);
         }
