@@ -1,5 +1,5 @@
 name: LukeSMPCore
-version: '5.8'
+version: '${project.version}'
 main: net.lukesmp.lukesmpcore.LukeSMPCore
 api-version: '1.21.4'
 authors: [CalcWIZ]

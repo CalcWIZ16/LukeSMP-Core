@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/LukeSMPCore.iml" filepath="$PROJECT_DIR$/LukeSMPCore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/LukeSMPCore.main.iml" filepath="$PROJECT_DIR$/.idea/modules/LukeSMPCore.main.iml" />
     </modules>
   </component>
 </project>
