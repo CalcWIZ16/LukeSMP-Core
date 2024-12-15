@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-<<<<<<< HEAD
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/LukeSMPCore.main.iml" filepath="$PROJECT_DIR$/.idea/modules/LukeSMPCore.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/net.lukesmp.LukeSMPCore.main.iml" filepath="$PROJECT_DIR$/.idea/modules/net.lukesmp.LukeSMPCore.main.iml" />
-=======
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/LukeSMP-Core.iml" filepath="$PROJECT_DIR$/.idea/modules/LukeSMP-Core.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/LukeSMP-Core.main.iml" filepath="$PROJECT_DIR$/.idea/modules/LukeSMP-Core.main.iml" />
->>>>>>> 7b071104eb338666cd9bf90184b02a8d2c3fcb9f
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/LukeSMP-Core.test.iml" filepath="$PROJECT_DIR$/.idea/modules/LukeSMP-Core.test.iml" />
     </modules>
   </component>
 </project>
