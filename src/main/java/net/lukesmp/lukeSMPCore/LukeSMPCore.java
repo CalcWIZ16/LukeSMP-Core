@@ -1,10 +1,17 @@
 package net.lukesmp.lukeSMPCore;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
+
+import java.io.IOException;
 
 public final class LukeSMPCore extends JavaPlugin implements Listener {
 
@@ -33,5 +40,66 @@ public final class LukeSMPCore extends JavaPlugin implements Listener {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+    }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) throws IOException {
+        Player player=event.getPlayer();
+
+        //tab header/footer
+        player.setPlayerListHeader(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"Luke"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP"+ChatColor.GRAY+""+ChatColor.BOLD+""+ChatColor.MAGIC+" | "+ChatColor.RED+""+ChatColor.BOLD+"Season V");
+        player.setPlayerListFooter(ChatColor.GRAY+""+ChatColor.BOLD+ChatColor.MAGIC+" | "+ChatColor.DARK_AQUA+"mc.lukesmp.net"+ChatColor.GRAY+ChatColor.BOLD+ChatColor.MAGIC+" | ");
+
+        //change join message
+        event.setJoinMessage(ChatColor.DARK_AQUA+"Luke"+ChatColor.DARK_PURPLE+"SMP"+ChatColor.RESET+" "+ChatColor.GRAY+ChatColor.BOLD+ChatColor.MAGIC+"|"+ChatColor.RESET+" "+ChatColor.RESET+ChatColor.GREEN+player.getDisplayName()+ChatColor.GRAY+" has joined");
+
+        //title at join
+        joinTitle(player);
+    }
+
+    private void joinTitle(Player player) {
+        int random = (int) (Math.random() * 6);
+        if (random==3){
+            player.sendTitle(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"Lucy"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season V");
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    player.sendTitle(ChatColor.DARK_AQUA+""+ChatColor.MAGIC+ChatColor.BOLD+"Lucy"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season V", 0, 20, 0);
+                }
+            }.runTaskLater(this,30L);
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    player.sendTitle(ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season V", 0, 20, 0);
+                }
+            }.runTaskLater(this, 40L);
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    player.sendTitle(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"L"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season V", 0, 20, 0);
+                }
+            }.runTaskLater(this, 42L);
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    player.sendTitle(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"Lu"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season V", 0, 20, 0);
+                }
+            }.runTaskLater(this, 44L);
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    player.sendTitle(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"Luk"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season V", 0, 20, 0);
+                }
+            }.runTaskLater(this, 46L);
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    player.sendTitle(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"Luke"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season V", 0, 70, 20);
+                }
+            }.runTaskLater(this, 48L);
+        }
+        else {
+            player.sendTitle(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"Luke"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP",ChatColor.RED+"Season V");
+        }
     }
 }
