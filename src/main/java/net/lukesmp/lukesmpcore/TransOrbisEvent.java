@@ -1,5 +1,6 @@
 package net.lukesmp.lukesmpcore;
 
+import com.destroystokyo.paper.ParticleBuilder;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -54,8 +55,9 @@ public class TransOrbisEvent implements Listener {
     private void startAsyncPositionDetection() {
         BukkitTask posDetector = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, () -> {
             for (Player player : Bukkit.getOnlinePlayers()) {
-                if (!(playersInTransit.contains(player.getUniqueId()))) {
-                    Location location = player.getLocation();
+                Location location = player.getLocation();
+                //check for Trans-Orbis pillars
+                if(!(playersInTransit.contains(player.getUniqueId()))) {
                     if (location.getWorld() == Bukkit.getWorld("world")) {
                         if (-1043 <= location.getBlockX() && location.getBlockX() <= -1037) {
                             if (819 <= location.getBlockZ() && location.getBlockZ() <= 825) {
@@ -79,6 +81,24 @@ public class TransOrbisEvent implements Listener {
                                 //east pillar (season 4 portal)
                                 player.sendMessage("Transporting to season 4");
                                 transport(player, Bukkit.getWorld("s4world"));
+                            }
+                        }
+                    }
+                }
+                //check for by entrance to pillar
+                if(location.getWorld() == Bukkit.getWorld("world")) {
+                    if(-1042 <= location.getBlockX() && location.getBlockX() <= -1038) {
+                        if(794 <= location.getBlockZ() && location.getBlockZ() <= 814) {
+                            if(125 <= location.getBlockY() == location.getBlockY() <= 130) {
+                                Location loc1 = new Location(Bukkit.getWorld("world"), -1039.5, 128, 818.5);
+                                for(int i = 0; i < 10; i++) {
+                                    new BukkitRunnable() {
+                                        @Override
+                                        public void run() {
+                                            player.getWorld().spawnParticle(Particle.ENCHANT, loc1, 10, 1, 1, 0);
+                                        }
+                                    }.runTaskLater(plugin, i);
+                                }
                             }
                         }
                     }
@@ -114,17 +134,30 @@ public class TransOrbisEvent implements Listener {
 //            }.runTaskLater(plugin, i);
 //        }
 
-        for(int i = 0; i < 120; i++) {
+        for(int i = 0; i < 160; i++) {
             int t = i;
+            Particle helixParticle = Particle.FIREWORK;
+//            ParticleBuilder helixParticle = new ParticleBuilder(Particle.HEART).location(player.getLocation()).color(0,0,255);
+//            helixParticle.spawn();
+
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    double sine = (Math.sin(t/4.0)*3);
-                    double cosine = (Math.cos(t/4.0)*3);
-                    player.getWorld().spawnParticle(Particle.HEART, player.getLocation().add(sine, 0, cosine), 100);
-                    player.getWorld().spawnParticle(Particle.FIREWORK, player.getLocation().add(-sine, 0, -cosine), 100);
-                    player.getWorld().spawnParticle(Particle.FIREWORK, player.getLocation().add(cosine, 0, sine), 1);
-                    player.getWorld().spawnParticle(Particle.FIREWORK, player.getLocation().add(-cosine, 0, -sine), 1);
+                    Location location = player.getLocation();
+                    double sine = (Math.sin(t/5.0)*3);
+                    double cosine = (Math.cos(t/5.0)*3);
+//                    helixParticle.location(location);
+//                    helixParticle.spawn();
+
+                    player.getWorld().spawnParticle(helixParticle, player.getLocation().add(sine, 0, cosine),0);
+                    player.getWorld().spawnParticle(helixParticle, player.getLocation().add(-sine, 0, cosine), 0);
+                    player.getWorld().spawnParticle(helixParticle, player.getLocation().add(sine, 0, -cosine), 0);
+                    player.getWorld().spawnParticle(helixParticle, player.getLocation().add(-sine, 0, -cosine), 0);
+
+                    player.getWorld().spawnParticle(helixParticle, player.getLocation().add(cosine, 0, sine), 0);
+                    player.getWorld().spawnParticle(helixParticle, player.getLocation().add(-cosine, 0, sine), 0);
+                    player.getWorld().spawnParticle(helixParticle, player.getLocation().add(cosine, 0, -sine), 0);
+                    player.getWorld().spawnParticle(helixParticle, player.getLocation().add(-cosine, 0, -sine), 0);
                 }
             }.runTaskLaterAsynchronously(plugin, t);
         }

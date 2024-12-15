@@ -9,7 +9,7 @@ plugins {
 }
 
 group = 'net.lukesmp'
-version = '5.8'
+version = '5.9'
 
 repositories {
     mavenCentral()
