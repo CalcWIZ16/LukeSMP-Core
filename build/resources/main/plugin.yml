@@ -1,8 +1,8 @@
 name: LukeSMPCore
-version: '${project.version}'
-main: net.lukesmp.lukesmpcore.LukeSMPCore
-api-version: '1.21.4'
-authors: [CalcWIZ]
+version: '5.9'
+main: net.lukesmp.lukeSMPCore.LukeSMPCore
+api-version: '1.21'
+authors: [ CalcWIZ ]
 description: A SpigotMC plugin that manages the fundamental cosmetic and behavioral features of the LukeSMP server
 website: https://www.lukesmp.net
 commands:
