@@ -1,0 +1,14 @@
+name: LukeSMPCore
+version: '5.9'
+main: net.lukesmp.lukeSMPCore.LukeSMPCore
+api-version: '1.21'
+authors: [ CalcWIZ ]
+description: A SpigotMC plugin that manages the fundamental cosmetic and behavioral features of the LukeSMP server
+website: https://www.lukesmp.net
+commands:
+  getworld:
+    description: Get the world name of the player
+    usage: /getworld
+  world:
+    description: Teleport to a world
+    usage: /world <world>
