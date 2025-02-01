@@ -1,5 +1,5 @@
 name: LukeSMPCore
-version: '5.9'
+version: '5.10'
 main: net.lukesmp.lukeSMPCore.LukeSMPCore
 api-version: '1.21'
 authors: [ CalcWIZ ]
@@ -12,3 +12,6 @@ commands:
   world:
     description: Teleport to a world
     usage: /world <world>
+  retrieve:
+    description: Retrieve a player's inventory/ender chest
+    usage: /retrieve

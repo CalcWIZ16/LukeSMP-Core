@@ -35,6 +35,10 @@ public final class LukeSMPCore extends JavaPlugin implements Listener {
         World world3Nether = new WorldCreator("s3world_nether").environment(World.Environment.NETHER).createWorld();
         World world4 = new WorldCreator("s4world").createWorld();
         World world4Nether = new WorldCreator("s4world_nether").environment(World.Environment.NETHER).createWorld();
+
+        if (!getDataFolder().exists()){
+            getDataFolder().mkdir();
+        }
     }
 
     @Override
