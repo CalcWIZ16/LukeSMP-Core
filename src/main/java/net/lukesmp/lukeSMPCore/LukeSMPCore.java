@@ -26,6 +26,7 @@ public final class LukeSMPCore extends JavaPlugin implements Listener {
 
         this.getCommand("world").setExecutor(new LukeSMPCommand());
         this.getCommand("getworld").setExecutor(new LukeSMPCommand());
+        this.getCommand("retrieve").setExecutor(new LukeSMPCommand());
 
         World world1 = new WorldCreator("s1world").createWorld();
         World world1Nether = new WorldCreator("s1world_nether").environment(World.Environment.NETHER).createWorld();

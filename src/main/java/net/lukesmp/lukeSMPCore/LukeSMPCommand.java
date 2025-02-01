@@ -53,7 +53,36 @@ public class LukeSMPCommand implements CommandExecutor {
                         Player player = (Player) sender;
                         World world = player.getWorld();
                         UUID playerUUID = player.getUniqueId();
-                        File playerFile = new File(Bukkit.getPluginsFolder() + "/LukeSMPCore/playerData/" + playerUUID + ".dat");
+                        File playerFile = null;
+                        switch(world.getName()) {
+                            case "s1world":
+                            case "s1world_nether":
+                                player.sendMessage("You are in world 1");
+                                playerFile = new File(Bukkit.getPluginsFolder() + "/LukeSMPCore/s1/" + playerUUID + ".dat");
+                                break;
+                            case "s2world":
+                            case "s2world_nether":
+                                player.sendMessage("You are in world 2");
+                                playerFile = new File(Bukkit.getPluginsFolder() + "/LukeSMPCore/s2/" + playerUUID + ".dat");
+                                break;
+                            case "s3world":
+                            case "s3world_nether":
+                                player.sendMessage("You are in world 3");
+                                playerFile = new File(Bukkit.getPluginsFolder() + "/LukeSMPCore/s3/" + playerUUID + ".dat");
+                                break;
+                            case "s4world":
+                            case "s4world_nether":
+                                player.sendMessage("You are in world 4");
+                                playerFile = new File(Bukkit.getPluginsFolder() + "/LukeSMPCore/s4/" + playerUUID + ".dat");
+                                break;
+                            default:
+                                player.sendMessage("There is no inventory to retrieve for this world");
+                                return true;
+                        }
+                        if(!playerFile.exists()) {
+                            player.sendMessage("No inventory to retrieve");
+                            return true;
+                        }
                         player.sendMessage(playerFile.toString());
                         return true;
                     }
