@@ -53,51 +53,82 @@ public class TransOrbisEvent implements Listener {
 
     private void startAsyncPositionDetection() {
         BukkitTask posDetector = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, () -> {
-            for (Player player : Bukkit.getOnlinePlayers()) {
+            for(Player player : Bukkit.getOnlinePlayers()) {
                 Location location = player.getLocation();
-                //check for Trans-Orbis pillars
                 if(!(playersInTransit.contains(player.getUniqueId()))) {
-                    if (location.getWorld() == Bukkit.getWorld("world")) {
-                        if (-1043 <= location.getBlockX() && location.getBlockX() <= -1037) {
-                            if (819 <= location.getBlockZ() && location.getBlockZ() <= 825) {
-                                //south pillar (season 1 portal)
+                    // in season 5 world
+                    if(location.getWorld() == Bukkit.getWorld("world")) {
+                        //on n-s axis
+                        if(-1043 <= location.getBlockX() && location.getBlockX() <= -1037) {
+                            // entrance particles
+                            if(794 <= location.getBlockZ() && location.getBlockZ() <= 814) {
+                                if(124 <= location.getBlockY() == location.getBlockY() <= 130) {
+                                    Location loc1 = new Location(Bukkit.getWorld("world"), -1039.5, 126, 818.5);
+                                    for (int i = 0; i < 10; i++) {
+                                        new BukkitRunnable() {
+                                            @Override
+                                            public void run() {
+                                                player.getWorld().spawnParticle(Particle.ENCHANT, loc1, 10, 1, 1, 0);
+                                            }
+                                        }.runTaskLater(plugin, i);
+                                    }
+                                }
+                            }
+                            //south pillar (season 1 portal)
+                            if(819 <= location.getBlockZ() && location.getBlockZ() <= 825) {
                                 player.sendMessage("Transporting to season 1");
                                 transport(player, Bukkit.getWorld("s1world"));
                             }
-                            if (699 <= location.getBlockZ() && location.getBlockZ() <= 705) {
-                                //north pillar (season 3 portal)
+                            //north pillar (season 3 portal)
+                            if(699 <= location.getBlockZ() && location.getBlockZ() <= 705) {
                                 player.sendMessage("Transporting to season 3");
                                 transport(player, Bukkit.getWorld("s3world"));
                             }
                         }
-                        if (759 <= location.getBlockZ() && location.getBlockZ() <= 765) {
+                        //on e-w axis
+                        if(759 <= location.getBlockZ() && location.getBlockZ() <= 765) {
+                            //west pillar (season 2 portal)
                             if (-1103 <= location.getBlockX() && location.getBlockX() <= -1097) {
-                                //west pillar (season 2 portal)
                                 player.sendMessage("Transporting to season 2");
                                 transport(player, Bukkit.getWorld("s2world"));
                             }
+                            //east pillar (season 4 portal)
                             if (-983 <= location.getBlockX() && location.getBlockX() <= -977) {
-                                //east pillar (season 4 portal)
                                 player.sendMessage("Transporting to season 4");
                                 transport(player, Bukkit.getWorld("s4world"));
                             }
                         }
                     }
-                }
-                //check for by entrance to pillar
-                if(location.getWorld() == Bukkit.getWorld("world")) {
-                    if(-1042 <= location.getBlockX() && location.getBlockX() <= -1038) {
-                        if(794 <= location.getBlockZ() && location.getBlockZ() <= 814) {
-                            if(124 <= location.getBlockY() == location.getBlockY() <= 130) {
-                                Location loc1 = new Location(Bukkit.getWorld("world"), -1039.5, 126, 818.5);
-                                for(int i = 0; i < 10; i++) {
-                                    new BukkitRunnable() {
-                                        @Override
-                                        public void run() {
-                                            player.getWorld().spawnParticle(Particle.ENCHANT, loc1, 10, 1, 1, 0);
-                                        }
-                                    }.runTaskLater(plugin, i);
+                    //in season 1 world
+                    if(location.getWorld() == Bukkit.getWorld("s1world")) {
+                        if(-99 <= location.getBlockX() && location.getBlockX() <= -93) {
+                            // entrance particles
+                            if(-100 <= location.getBlockZ() && location.getBlockZ() <= -80) {
+                                if(96 <= location.getBlockY() == location.getBlockY() <= 102) {
+                                    Location loc1 = new Location(Bukkit.getWorld("s1world"), -95.5, 98, -103.5);
+                                    for(int i = 0; i < 10; i++) {
+                                        new BukkitRunnable() {
+                                            @Override
+                                            public void run() {
+                                                player.getWorld().spawnParticle(Particle.ENCHANT, loc1, 10, 1, 1, 0);
+                                            }
+                                        }.runTaskLater(plugin, i);
+                                    }
                                 }
+                            }
+                            if (-111 <= location.getBlockZ() && location.getBlockZ() <= -105) {
+                                //south pillar (season 1 portal)
+                                player.sendMessage("Transporting to season 5");
+                                transport(player, Bukkit.getWorld("world"));
+                            }
+                        }
+                    }
+                    //in season 2 world
+                    if(location.getWorld() == Bukkit.getWorld("s2world")) {
+                        if(40 <= location.getBlockX() && location.getBlockX() <= 46) {
+                            if(165 <= location.getBlockZ() && location.getBlockZ() <= 171) {
+                                player.sendMessage("Transporting to season 5");
+                                transport(player, Bukkit.getWorld("world"));
                             }
                         }
                     }
@@ -111,11 +142,30 @@ public class TransOrbisEvent implements Listener {
      */
     private void transport(Player player, World destinationWorld) {
         playersInTransit.add(player.getUniqueId());
+        Location destination = null;
+        switch (destinationWorld.getName()) {
+            case "world":
+                destination = new Location(destinationWorld, -1039.5, 146, 762.5);
+                break;
+            case "s1world":
+                destination = new Location(destinationWorld, -95.5, 122, -47.5);
+                break;
+            case "s2world":
+                destination = new Location(destinationWorld, -16.9, 83, 168.5);
+                break;
+            case "s3world":
+                destination = new Location(destinationWorld, 48, 84, 191);
+                break;
+            case "s4world":
+                destination = new Location(destinationWorld, -15, 110, -63);
+                break;
+        }
 
+        Location finalDestination = destination;
         new BukkitRunnable() {
             @Override
             public void run() {
-                player.teleport(destinationWorld.getSpawnLocation().add(0,20,0));
+                player.teleport(finalDestination);
                 player.addPotionEffect(PotionEffectType.SLOW_FALLING.createEffect(100,0));
                 playersInTransit.remove(player.getUniqueId());
             }
