@@ -76,12 +76,10 @@ public class TransOrbisEvent implements Listener {
                             }
                             //south pillar (season 1 portal)
                             if(819 <= location.getBlockZ() && location.getBlockZ() <= 825) {
-                                player.sendMessage("Transporting to season 1");
                                 transport(player, Bukkit.getWorld("s1world"));
                             }
                             //north pillar (season 3 portal)
                             if(699 <= location.getBlockZ() && location.getBlockZ() <= 705) {
-                                player.sendMessage("Transporting to season 3");
                                 transport(player, Bukkit.getWorld("s3world"));
                             }
                         }
@@ -89,12 +87,10 @@ public class TransOrbisEvent implements Listener {
                         if(759 <= location.getBlockZ() && location.getBlockZ() <= 765) {
                             //west pillar (season 2 portal)
                             if (-1103 <= location.getBlockX() && location.getBlockX() <= -1097) {
-                                player.sendMessage("Transporting to season 2");
                                 transport(player, Bukkit.getWorld("s2world"));
                             }
                             //east pillar (season 4 portal)
                             if (-983 <= location.getBlockX() && location.getBlockX() <= -977) {
-                                player.sendMessage("Transporting to season 4");
                                 transport(player, Bukkit.getWorld("s4world"));
                             }
                         }
@@ -118,7 +114,6 @@ public class TransOrbisEvent implements Listener {
                             }
                             if (-111 <= location.getBlockZ() && location.getBlockZ() <= -105) {
                                 //south pillar (season 1 portal)
-                                player.sendMessage("Transporting to season 5");
                                 transport(player, Bukkit.getWorld("world"));
                             }
                         }
@@ -127,7 +122,6 @@ public class TransOrbisEvent implements Listener {
                     if(location.getWorld() == Bukkit.getWorld("s2world")) {
                         if(40 <= location.getBlockX() && location.getBlockX() <= 46) {
                             if(165 <= location.getBlockZ() && location.getBlockZ() <= 171) {
-                                player.sendMessage("Transporting to season 5");
                                 transport(player, Bukkit.getWorld("world"));
                             }
                         }
