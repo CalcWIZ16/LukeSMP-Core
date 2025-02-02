@@ -9,7 +9,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.UUID;
+import java.util.logging.Level;
 
 public class LukeSMPCommand implements CommandExecutor {
     @Override
@@ -42,56 +44,61 @@ public class LukeSMPCommand implements CommandExecutor {
                 return true;
             }
         }
-        if(command.getName().equalsIgnoreCase("retrieve")){
-            if(args.length == 0) {
-                sender.sendMessage(ChatColor.RED + "Please confirm");
-                return true;
-            }
-            if(args.length == 1) {
-                if(args[0].equalsIgnoreCase("confirm")) {
-                    if(sender instanceof Player) {
-                        Player player = (Player) sender;
-                        World world = player.getWorld();
-                        UUID playerUUID = player.getUniqueId();
-                        File playerFile = null;
-                        switch(world.getName()) {
-                            case "s1world":
-                            case "s1world_nether":
-                                player.sendMessage("You are in world 1");
-                                playerFile = new File(Bukkit.getPluginsFolder() + "/LukeSMPCore/s1/" + playerUUID + ".dat");
-                                break;
-                            case "s2world":
-                            case "s2world_nether":
-                                player.sendMessage("You are in world 2");
-                                playerFile = new File(Bukkit.getPluginsFolder() + "/LukeSMPCore/s2/" + playerUUID + ".dat");
-                                break;
-                            case "s3world":
-                            case "s3world_nether":
-                                player.sendMessage("You are in world 3");
-                                playerFile = new File(Bukkit.getPluginsFolder() + "/LukeSMPCore/s3/" + playerUUID + ".dat");
-                                break;
-                            case "s4world":
-                            case "s4world_nether":
-                                player.sendMessage("You are in world 4");
-                                playerFile = new File(Bukkit.getPluginsFolder() + "/LukeSMPCore/s4/" + playerUUID + ".dat");
-                                break;
-                            default:
-                                player.sendMessage("There is no inventory to retrieve for this world");
-                                return true;
-                        }
-                        if(!playerFile.exists()) {
-                            player.sendMessage("No inventory to retrieve");
-                            return true;
-                        }
-                        player.sendMessage(playerFile.toString());
-                        return true;
-                    }
-                    sender.sendMessage(ChatColor.RED + "You must be a player to use this command!");
-                    return true;
-                }
-            }
-
-        }
+//        if(command.getName().equalsIgnoreCase("retrieve")){
+//            if(args.length == 0) {
+//                sender.sendMessage(ChatColor.RED + "Please confirm");
+//                return true;
+//            }
+//            if(args.length == 1) {
+//                if(args[0].equalsIgnoreCase("confirm")) {
+//                    if(sender instanceof Player) {
+//                        Player player = (Player) sender;
+//                        World world = player.getWorld();
+//                        UUID playerUUID = player.getUniqueId();
+//                        File playerFile = null;
+//                        switch(world.getName()) {
+//                            case "s1world":
+//                            case "s1world_nether":
+//                                player.sendMessage("You are in world 1");
+//                                playerFile = new File(Bukkit.getPluginsFolder() + "/LukeSMPCore/s1/" + playerUUID + ".dat");
+//                                break;
+//                            case "s2world":
+//                            case "s2world_nether":
+//                                player.sendMessage("You are in world 2");
+//                                playerFile = new File(Bukkit.getPluginsFolder() + "/LukeSMPCore/s2/" + playerUUID + ".dat");
+//                                break;
+//                            case "s3world":
+//                            case "s3world_nether":
+//                                player.sendMessage("You are in world 3");
+//                                playerFile = new File(Bukkit.getPluginsFolder() + "/LukeSMPCore/s3/" + playerUUID + ".dat");
+//                                break;
+//                            case "s4world":
+//                            case "s4world_nether":
+//                                player.sendMessage("You are in world 4");
+//                                playerFile = new File(Bukkit.getPluginsFolder() + "/LukeSMPCore/s4/" + playerUUID + ".dat");
+//                                break;
+//                            default:
+//                                player.sendMessage("There is no inventory to retrieve for this world");
+//                                return true;
+//                        }
+//                        if(!playerFile.exists()) {
+//                            player.sendMessage("No inventory to retrieve");
+//                            return true;
+//                        }
+//                        player.sendMessage(playerFile.toString());
+//                        try {
+//                            InventoryRetriever.readItemStacksFromFile(playerFile);
+//                        } catch (IOException e) {
+//                            throw new RuntimeException(e);
+//                        }
+//                        return true;
+//                    }
+//                    sender.sendMessage(ChatColor.RED + "You must be a player to use this command!");
+//                    return true;
+//                }
+//            }
+//
+//        }
         return false;
     }
 }

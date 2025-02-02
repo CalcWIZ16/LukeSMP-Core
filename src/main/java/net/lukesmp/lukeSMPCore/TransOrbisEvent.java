@@ -88,8 +88,8 @@ public class TransOrbisEvent implements Listener {
                 if(location.getWorld() == Bukkit.getWorld("world")) {
                     if(-1042 <= location.getBlockX() && location.getBlockX() <= -1038) {
                         if(794 <= location.getBlockZ() && location.getBlockZ() <= 814) {
-                            if(125 <= location.getBlockY() == location.getBlockY() <= 130) {
-                                Location loc1 = new Location(Bukkit.getWorld("world"), -1039.5, 128, 818.5);
+                            if(124 <= location.getBlockY() == location.getBlockY() <= 130) {
+                                Location loc1 = new Location(Bukkit.getWorld("world"), -1039.5, 126, 818.5);
                                 for(int i = 0; i < 10; i++) {
                                     new BukkitRunnable() {
                                         @Override
