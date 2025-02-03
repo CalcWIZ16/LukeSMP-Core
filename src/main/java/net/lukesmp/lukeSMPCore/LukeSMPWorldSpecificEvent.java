@@ -17,7 +17,7 @@ public class LukeSMPWorldSpecificEvent implements Listener {
         Location location = event.getPlayer().getLocation();
 
         //kill player on B
-        if(location.getWorld() == Bukkit.getWorld("world4")){
+        if(location.getWorld() == Bukkit.getWorld("s4world")){
             if((location.getBlockX() >= -521) && (location.getBlockX() <= -520)){
                 if((location.getBlockY() == 68)){
                     if((location.getBlockZ() >= -180) && (location.getBlockZ() <= -179)){
@@ -82,7 +82,7 @@ public class LukeSMPWorldSpecificEvent implements Listener {
                 }
             }
         }
-        if(block.getWorld().getName().equals("world1")) {
+        if(block.getWorld().getName().equals("s1world")) {
             //passageway
             if(y>=92) {
                 if(-99<=x && x<=-93) {
@@ -100,6 +100,28 @@ public class LukeSMPWorldSpecificEvent implements Listener {
             //origin
             if(-110<=x && x<=-82) {
                 if(-62<=z && z<=-34) {
+                    event.setCancelled(true);
+                }
+            }
+        }
+        if(block.getWorld().getName().equals("s2world")) {
+            //passageway
+            if(y>=60) {
+                if(165<=z && z<=171) {
+                    if(-3<=x && x<=38) {
+                        event.setCancelled(true);
+                    }
+                }
+            }
+            //spire
+            if(39<=x && x<=47) {
+                if(164<=z && z<=172) {
+                    event.setCancelled(true);
+                }
+            }
+            //origin
+            if(-31<=x && x<=-3) {
+                if(154<=z && z<=182) {
                     event.setCancelled(true);
                 }
             }
@@ -158,7 +180,7 @@ public class LukeSMPWorldSpecificEvent implements Listener {
                 }
             }
         }
-        if(block.getWorld().getName().equals("world1")) {
+        if(block.getWorld().getName().equals("s1world")) {
             //passageway
             if(y>=92) {
                 if(-99<=x && x<=-93) {
@@ -176,6 +198,28 @@ public class LukeSMPWorldSpecificEvent implements Listener {
             //origin
             if(-110<=x && x<=-82) {
                 if(-62<=z && z<=-34) {
+                    event.setCancelled(true);
+                }
+            }
+        }
+        if(block.getWorld().getName().equals("s2world")) {
+            //passageway
+            if(y>=60) {
+                if(165<=z && z<=171) {
+                    if(-3<=x && x<=38) {
+                        event.setCancelled(true);
+                    }
+                }
+            }
+            //spire
+            if(39<=x && x<=47) {
+                if(164<=z && z<=172) {
+                    event.setCancelled(true);
+                }
+            }
+            //origin
+            if(-31<=x && x<=-3) {
+                if(154<=z && z<=182) {
                     event.setCancelled(true);
                 }
             }
