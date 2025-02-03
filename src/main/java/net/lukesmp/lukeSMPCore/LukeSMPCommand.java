@@ -1,9 +1,6 @@
 package net.lukesmp.lukeSMPCore;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -54,38 +51,42 @@ public class LukeSMPCommand implements CommandExecutor {
                 if(args[0].equalsIgnoreCase("confirm")) {
                     if(sender instanceof Player) {
                         Player player = (Player) sender;
-                        World world = player.getWorld();
-                        UUID playerUUID = player.getUniqueId();
-                        InventoryRetriever.giveItemStacksToPlayer(InventoryRetriever.readItemStacksFromContainer(new Location(Bukkit.getWorld("world"), -1040, 124, 771)), player);
+                        Location keyLocation = InventoryRetriever.getKeyLocation(player.getUniqueId(), player.getWorld());
 
-//                        switch(world.getName()) {
-//                            case "s1world":
-//                            case "s1world_nether":
-//                                player.sendMessage("You are in world 1");
-//                                playerFile = new File(Bukkit.getPluginsFolder() + "/LukeSMPCore/s1/" + playerUUID + ".dat");
-//                                break;
-//                            case "s2world":
-//                            case "s2world_nether":
-//                                player.sendMessage("You are in world 2");
-//                                playerFile = new File(Bukkit.getPluginsFolder() + "/LukeSMPCore/s2/" + playerUUID + ".dat");
-//                                break;
-//                            case "s3world":
-//                            case "s3world_nether":
-//                                player.sendMessage("You are in world 3");
-//                                playerFile = new File(Bukkit.getPluginsFolder() + "/LukeSMPCore/s3/" + playerUUID + ".dat");
-//                                break;
-//                            case "s4world":
-//                            case "s4world_nether":
-//                                player.sendMessage("You are in world 4");
-//                                playerFile = new File(Bukkit.getPluginsFolder() + "/LukeSMPCore/s4/" + playerUUID + ".dat");
-//                                break;
-//                            default:
-//                                player.sendMessage("There is no inventory to retrieve for this world");
-//                                return true;
-//                        }
+                        if(keyLocation == null) {
+                            player.sendMessage(ChatColor.RED + "You do not have any items to retrieve in this world");
+                            return true;
+                        }
+
+                        if(keyLocation.getBlock().getType() == Material.EMERALD_BLOCK) {
+                            InventoryRetriever.giveItemStacksToPlayer(InventoryRetriever.readItemStacksFromContainer(keyLocation.subtract(0,0,1)), player);
+                            InventoryRetriever.giveItemStacksToPlayer(InventoryRetriever.readItemStacksFromContainer(keyLocation.subtract(0,0,1)), player);
+                            player.sendMessage(ChatColor.GREEN + "Items have been retrieved");
+                            keyLocation.add(0,0,2).getBlock().setType(Material.RED_CONCRETE);
+                        } else {
+                            player.sendMessage(ChatColor.RED + "You have already claimed your items in this world");
+                        }
                         return true;
                     }
                     sender.sendMessage(ChatColor.RED + "You must be a player to use this command!");
+                    return true;
+                } else {
+                    Player player = (Player) sender;
+                    Location keyLocation = InventoryRetriever.getKeyLocation(UUID.fromString(args[0]), player.getWorld());
+
+                    if(keyLocation == null) {
+                        player.sendMessage(ChatColor.RED + "You do not have any items to retrieve in this world");
+                        return true;
+                    }
+
+                    if(keyLocation.getBlock().getType() == Material.EMERALD_BLOCK) {
+                        InventoryRetriever.giveItemStacksToPlayer(InventoryRetriever.readItemStacksFromContainer(keyLocation.subtract(0,0,1)), player);
+                        InventoryRetriever.giveItemStacksToPlayer(InventoryRetriever.readItemStacksFromContainer(keyLocation.subtract(0,0,1)), player);
+                        player.sendMessage(ChatColor.GREEN + "Items have been retrieved");
+                        keyLocation.add(0,0,2).getBlock().setType(Material.RED_CONCRETE);
+                    } else {
+                        player.sendMessage(ChatColor.RED + "You have already claimed your items in this world");
+                    }
                     return true;
                 }
             }
