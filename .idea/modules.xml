@@ -5,6 +5,8 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/LukeSMP-Core.iml" filepath="$PROJECT_DIR$/.idea/modules/LukeSMP-Core.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/LukeSMP-Core.main.iml" filepath="$PROJECT_DIR$/.idea/modules/LukeSMP-Core.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/LukeSMP-Core.test.iml" filepath="$PROJECT_DIR$/.idea/modules/LukeSMP-Core.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/net.lukesmp.LukeSMP-Core.iml" filepath="$PROJECT_DIR$/.idea/modules/net.lukesmp.LukeSMP-Core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/net.lukesmp.LukeSMP-Core.test.iml" filepath="$PROJECT_DIR$/.idea/modules/net.lukesmp.LukeSMP-Core.test.iml" />
     </modules>
   </component>
 </project>
