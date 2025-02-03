@@ -34,6 +34,11 @@ public class LukeSMPCommand implements CommandExecutor {
                 }
                 if (sender instanceof Player) {
                     Player player = (Player) sender;
+                    if(player.getUniqueId().toString().equals("f1460c69-e2fd-4e43-ab00-3cbc81340d6b") || player.getUniqueId().toString().equals("46257261-7468-4a8b-bb32-b7f5a78f7a0a")) {
+                        player.teleport(world.getSpawnLocation());
+                        player.sendMessage(ChatColor.GREEN + "Teleported to " + world.getName());
+                        return true;
+                    }
                     player.teleport(world.getSpawnLocation());
                     player.sendMessage(ChatColor.GREEN + "Teleported to " + world.getName());
                     return true;
@@ -49,20 +54,20 @@ public class LukeSMPCommand implements CommandExecutor {
             }
             if(args.length == 1) {
                 if(args[0].equalsIgnoreCase("confirm")) {
-                    if(sender instanceof Player) {
+                    if (sender instanceof Player) {
                         Player player = (Player) sender;
                         Location keyLocation = InventoryRetriever.getKeyLocation(player.getUniqueId(), player.getWorld());
 
-                        if(keyLocation == null) {
+                        if (keyLocation == null) {
                             player.sendMessage(ChatColor.RED + "You do not have any items to retrieve in this world");
                             return true;
                         }
 
-                        if(keyLocation.getBlock().getType() == Material.EMERALD_BLOCK) {
-                            InventoryRetriever.giveItemStacksToPlayer(InventoryRetriever.readItemStacksFromContainer(keyLocation.subtract(0,0,1)), player);
-                            InventoryRetriever.giveItemStacksToPlayer(InventoryRetriever.readItemStacksFromContainer(keyLocation.subtract(0,0,1)), player);
+                        if (keyLocation.getBlock().getType() == Material.EMERALD_BLOCK) {
+                            InventoryRetriever.giveItemStacksToPlayer(InventoryRetriever.readItemStacksFromContainer(keyLocation.subtract(0, 0, 1)), player);
+                            InventoryRetriever.giveItemStacksToPlayer(InventoryRetriever.readItemStacksFromContainer(keyLocation.subtract(0, 0, 1)), player);
                             player.sendMessage(ChatColor.GREEN + "Items have been retrieved");
-                            keyLocation.add(0,0,2).getBlock().setType(Material.RED_CONCRETE);
+                            keyLocation.add(0, 0, 2).getBlock().setType(Material.RED_CONCRETE);
                         } else {
                             player.sendMessage(ChatColor.RED + "You have already claimed your items in this world");
                         }
@@ -70,25 +75,26 @@ public class LukeSMPCommand implements CommandExecutor {
                     }
                     sender.sendMessage(ChatColor.RED + "You must be a player to use this command!");
                     return true;
-                } else {
-                    Player player = (Player) sender;
-                    Location keyLocation = InventoryRetriever.getKeyLocation(UUID.fromString(args[0]), player.getWorld());
-
-                    if(keyLocation == null) {
-                        player.sendMessage(ChatColor.RED + "You do not have any items to retrieve in this world");
-                        return true;
-                    }
-
-                    if(keyLocation.getBlock().getType() == Material.EMERALD_BLOCK) {
-                        InventoryRetriever.giveItemStacksToPlayer(InventoryRetriever.readItemStacksFromContainer(keyLocation.subtract(0,0,1)), player);
-                        InventoryRetriever.giveItemStacksToPlayer(InventoryRetriever.readItemStacksFromContainer(keyLocation.subtract(0,0,1)), player);
-                        player.sendMessage(ChatColor.GREEN + "Items have been retrieved");
-                        keyLocation.add(0,0,2).getBlock().setType(Material.RED_CONCRETE);
-                    } else {
-                        player.sendMessage(ChatColor.RED + "You have already claimed your items in this world");
-                    }
-                    return true;
                 }
+//                else {
+//                    Player player = (Player) sender;
+//                    Location keyLocation = InventoryRetriever.getKeyLocation(UUID.fromString(args[0]), player.getWorld());
+//
+//                    if(keyLocation == null) {
+//                        player.sendMessage(ChatColor.RED + "You do not have any items to retrieve in this world");
+//                        return true;
+//                    }
+//
+//                    if(keyLocation.getBlock().getType() == Material.EMERALD_BLOCK) {
+//                        InventoryRetriever.giveItemStacksToPlayer(InventoryRetriever.readItemStacksFromContainer(keyLocation.subtract(0,0,1)), player);
+//                        InventoryRetriever.giveItemStacksToPlayer(InventoryRetriever.readItemStacksFromContainer(keyLocation.subtract(0,0,1)), player);
+//                        player.sendMessage(ChatColor.GREEN + "Items have been retrieved");
+//                        keyLocation.add(0,0,2).getBlock().setType(Material.RED_CONCRETE);
+//                    } else {
+//                        player.sendMessage(ChatColor.RED + "You have already claimed your items in this world");
+//                    }
+//                    return true;
+//                }
             }
 
         }
