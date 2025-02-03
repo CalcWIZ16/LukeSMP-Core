@@ -2,6 +2,7 @@ package net.lukesmp.lukeSMPCore;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -44,18 +45,19 @@ public class LukeSMPCommand implements CommandExecutor {
                 return true;
             }
         }
-//        if(command.getName().equalsIgnoreCase("retrieve")){
-//            if(args.length == 0) {
-//                sender.sendMessage(ChatColor.RED + "Please confirm");
-//                return true;
-//            }
-//            if(args.length == 1) {
-//                if(args[0].equalsIgnoreCase("confirm")) {
-//                    if(sender instanceof Player) {
-//                        Player player = (Player) sender;
-//                        World world = player.getWorld();
-//                        UUID playerUUID = player.getUniqueId();
-//                        File playerFile = null;
+        if(command.getName().equalsIgnoreCase("retrieve")){
+            if(args.length == 0) {
+                sender.sendMessage(ChatColor.RED + "Please confirm");
+                return true;
+            }
+            if(args.length == 1) {
+                if(args[0].equalsIgnoreCase("confirm")) {
+                    if(sender instanceof Player) {
+                        Player player = (Player) sender;
+                        World world = player.getWorld();
+                        UUID playerUUID = player.getUniqueId();
+                        InventoryRetriever.giveItemStacksToPlayer(InventoryRetriever.readItemStacksFromContainer(new Location(Bukkit.getWorld("world"), -1040, 124, 771)), player);
+
 //                        switch(world.getName()) {
 //                            case "s1world":
 //                            case "s1world_nether":
@@ -81,24 +83,14 @@ public class LukeSMPCommand implements CommandExecutor {
 //                                player.sendMessage("There is no inventory to retrieve for this world");
 //                                return true;
 //                        }
-//                        if(!playerFile.exists()) {
-//                            player.sendMessage("No inventory to retrieve");
-//                            return true;
-//                        }
-//                        player.sendMessage(playerFile.toString());
-//                        try {
-//                            InventoryRetriever.readItemStacksFromFile(playerFile);
-//                        } catch (IOException e) {
-//                            throw new RuntimeException(e);
-//                        }
-//                        return true;
-//                    }
-//                    sender.sendMessage(ChatColor.RED + "You must be a player to use this command!");
-//                    return true;
-//                }
-//            }
-//
-//        }
+                        return true;
+                    }
+                    sender.sendMessage(ChatColor.RED + "You must be a player to use this command!");
+                    return true;
+                }
+            }
+
+        }
         return false;
     }
 }
