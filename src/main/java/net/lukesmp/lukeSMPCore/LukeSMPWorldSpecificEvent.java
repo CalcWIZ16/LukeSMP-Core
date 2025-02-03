@@ -39,7 +39,7 @@ public class LukeSMPWorldSpecificEvent implements Listener {
         if (block.getWorld().getName().equals("world")) {
             //passageways
             if (y>=120){
-                if (-1042<=x && x<=-1038) {
+                if (-1043<=x && x<=-1037) {
                     //North passage
                     if (707<=z && z<=748) {
                         event.setCancelled(true);
@@ -49,7 +49,7 @@ public class LukeSMPWorldSpecificEvent implements Listener {
                         event.setCancelled(true);
                     }
                 }
-                if (760<=z && z<=764) {
+                if (759<=z && z<=765) {
                     //East passage
                     if (-1026<=x && x<=-985) {
                         event.setCancelled(true);
@@ -82,6 +82,28 @@ public class LukeSMPWorldSpecificEvent implements Listener {
                 }
             }
         }
+        if(block.getWorld().getName().equals("world1")) {
+            //passageway
+            if(y>=92) {
+                if(-99<=x && x<=-93) {
+                    if(-103<=z && z<=-62) {
+                        event.setCancelled(true);
+                    }
+                }
+            }
+            //spire
+            if(-100<=x && x<=-92) {
+                if(-112<=z && z<=-104) {
+                    event.setCancelled(true);
+                }
+            }
+            //origin
+            if(-110<=x && x<=-82) {
+                if(-62<=z && z<=-34) {
+                    event.setCancelled(true);
+                }
+            }
+        }
     }
     @EventHandler
     public void onBlockPlaceEvent(BlockPlaceEvent event) {
@@ -92,46 +114,68 @@ public class LukeSMPWorldSpecificEvent implements Listener {
         Integer z = block.getZ();
         if (block.getWorld().getName().equals("world")) {
             //passageways
-            if (y >= 120) {
-                if (-1042 <= x && x <= -1038) {
+            if (y>=120){
+                if (-1043<=x && x<=-1037) {
                     //North passage
-                    if (707 <= z && z <= 748) {
+                    if (707<=z && z<=748) {
                         event.setCancelled(true);
                     }
                     //South passage
-                    if (776 <= z && z <= 817) {
+                    if (776<=z && z<=817) {
                         event.setCancelled(true);
                     }
                 }
-                if (760 <= z && z <= 764) {
+                if (759<=z && z<=765) {
                     //East passage
-                    if (-1026 <= x && x <= -985) {
+                    if (-1026<=x && x<=-985) {
                         event.setCancelled(true);
                     }
                     //West passage
-                    if (-1095 <= x && x <= -1054) {
+                    if (-1095<=x && x<=-1054) {
                         event.setCancelled(true);
                     }
                 }
             }
             //spires
-            if (-1044 <= x && x <= -1036) {
+            if (-1044<=x && x<=-1036){
                 //south spire
-                if (818 <= z && z <= 826) {
+                if (818<=z && z<=826) {
                     event.setCancelled(true);
                 }
                 //north spire
-                if (698 <= z && z <= 706) {
+                if (698<=z && z<=706) {
                     event.setCancelled(true);
                 }
             }
-            if (758 <= z && z <= 766) {
+            if (758<=z && z<=766) {
                 //east spire
-                if (-984 <= x && x <= -976) {
+                if (-984<=x && x<=-976) {
                     event.setCancelled(true);
                 }
                 //west spire
-                if (-1104 <= x && x <= -1096) {
+                if (-1104<=x && x<=-1096) {
+                    event.setCancelled(true);
+                }
+            }
+        }
+        if(block.getWorld().getName().equals("world1")) {
+            //passageway
+            if(y>=92) {
+                if(-99<=x && x<=-93) {
+                    if(-103<=z && z<=-62) {
+                        event.setCancelled(true);
+                    }
+                }
+            }
+            //spire
+            if(-100<=x && x<=-92) {
+                if(-112<=z && z<=-104) {
+                    event.setCancelled(true);
+                }
+            }
+            //origin
+            if(-110<=x && x<=-82) {
+                if(-62<=z && z<=-34) {
                     event.setCancelled(true);
                 }
             }
