@@ -84,16 +84,16 @@ public class TransOrbisEvent implements Listener {
 //                            }
                         }
                         //on e-w axis
-//                        if(759 <= location.getBlockZ() && location.getBlockZ() <= 765) {
-//                            //west pillar (season 2 portal)
-//                            if (-1103 <= location.getBlockX() && location.getBlockX() <= -1097) {
-//                                transport(player, Bukkit.getWorld("s2world"));
-//                            }
-//                            //east pillar (season 4 portal)
+                        if(759 <= location.getBlockZ() && location.getBlockZ() <= 765) {
+                            //west pillar (season 2 portal)
+                            if (-1103 <= location.getBlockX() && location.getBlockX() <= -1097) {
+                                transport(player, Bukkit.getWorld("s2world"));
+                            }
+                            //east pillar (season 4 portal)
 //                            if (-983 <= location.getBlockX() && location.getBlockX() <= -977) {
 //                                transport(player, Bukkit.getWorld("s4world"));
 //                            }
-//                        }
+                        }
                     }
                     //in season 1 world
                     if(location.getWorld() == Bukkit.getWorld("s1world")) {
