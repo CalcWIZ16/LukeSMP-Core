@@ -40,6 +40,8 @@ public final class LukeSMPCore extends JavaPlugin implements Listener {
         if (!getDataFolder().exists()){
             getDataFolder().mkdir();
         }
+
+        getServer().getMessenger().registerOutgoingPluginChannel(this,"BungeeCord");
     }
 
     @Override

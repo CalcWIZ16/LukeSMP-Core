@@ -1,6 +1,8 @@
 package net.lukesmp.lukeSMPCore;
 
 import com.destroystokyo.paper.ParticleBuilder;
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -58,31 +60,50 @@ public class TransOrbisEvent implements Listener {
                 if(!(playersInTransit.contains(player.getUniqueId()))) {
                     // in season 5 world
                     if(location.getWorld() == Bukkit.getWorld("world")) {
-                        //on n-s axis
-                        if(-1043 <= location.getBlockX() && location.getBlockX() <= -1037) {
-                            // entrance particles
-                            if(794 <= location.getBlockZ() && location.getBlockZ() <= 814) {
-                                if(124 <= location.getBlockY() == location.getBlockY() <= 130) {
-                                    Location loc1 = new Location(Bukkit.getWorld("world"), -1039.5, 126, 818.5);
-                                    for (int i = 0; i < 10; i++) {
-                                        new BukkitRunnable() {
-                                            @Override
-                                            public void run() {
-                                                player.getWorld().spawnParticle(Particle.ENCHANT, loc1, 10, 1, 1, 0);
-                                            }
-                                        }.runTaskLater(plugin, i);
+                        if(-1053 <= location.getBlockX() && location.getBlockX() <= -1027) {
+                            //abyssal spire trigger
+                            if(50 <= location.getBlockY() && location.getBlockY() <= 65) {
+                                if(749 <= location.getBlockZ() && location.getBlockZ() <= 775) {
+                                    Block center = location.getWorld().getBlockAt(-1040, 58, 762);
+                                    if(center.getLocation().distance(location) <= 13) {
+                                        //teleport to abyssal spire
+                                        //plugin message Connect to another server
+                                        player.sendMessage(ChatColor.GREEN + "Connecting to the Abyssal Spire...");
+
+                                        ByteArrayDataOutput out = ByteStreams.newDataOutput();
+                                        out.writeUTF("Connect");
+                                        out.writeUTF("AbyssalSpire");
+                                        plugin.getServer().sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
                                     }
                                 }
                             }
-                            //south pillar (season 1 portal)
-                            if(819 <= location.getBlockZ() && location.getBlockZ() <= 825) {
-                                transport(player, Bukkit.getWorld("s1world"));
-                            }
-                            //north pillar (season 3 portal)
+                            //on n-s axis
+                            if(-1043 <= location.getBlockX() && location.getBlockX() <= -1037) {
+                                // entrance particles
+                                if(794 <= location.getBlockZ() && location.getBlockZ() <= 814) {
+                                    if(124 <= location.getBlockY() == location.getBlockY() <= 130) {
+                                        Location loc1 = new Location(Bukkit.getWorld("world"), -1039.5, 126, 818.5);
+                                        for (int i = 0; i < 10; i++) {
+                                            new BukkitRunnable() {
+                                                @Override
+                                                public void run() {
+                                                    player.getWorld().spawnParticle(Particle.ENCHANT, loc1, 10, 1, 1, 0);
+                                                }
+                                            }.runTaskLater(plugin, i);
+                                        }
+                                    }
+                                }
+                                //south pillar (season 1 portal)
+                                if(819 <= location.getBlockZ() && location.getBlockZ() <= 825) {
+                                    transport(player, Bukkit.getWorld("s1world"));
+                                }
+                                //north pillar (season 3 portal)
 //                            if(699 <= location.getBlockZ() && location.getBlockZ() <= 705) {
 //                                transport(player, Bukkit.getWorld("s3world"));
 //                            }
+                            }
                         }
+
                         //on e-w axis
                         if(759 <= location.getBlockZ() && location.getBlockZ() <= 765) {
                             //west pillar (season 2 portal)
