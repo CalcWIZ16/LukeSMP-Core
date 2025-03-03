@@ -205,18 +205,4 @@ public class TransOrbisEvent implements Listener {
             }.runTaskLaterAsynchronously(plugin, t);
         }
     }
-
-    private boolean unlockCheck(Block keyLocation, Material baseBlock) {
-        if (keyLocation.getType() == baseBlock) {
-            for (int x = -1; x <= 1; x++) {
-                for (int z = -1; z <= 1; z++) {
-                    if (keyLocation.getRelative(x, -1, z).getType() != baseBlock) {
-                        return false;
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
-    }
 }

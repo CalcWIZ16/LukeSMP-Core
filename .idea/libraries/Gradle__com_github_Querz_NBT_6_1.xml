@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.Querz:NBT:6.1" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.github.Querz" artifactId="NBT" version="6.1" baseVersion="6.1" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.Querz/NBT/6.1/13d278cda13963398b05effe4406ff0c5a77a4ba/NBT-6.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
