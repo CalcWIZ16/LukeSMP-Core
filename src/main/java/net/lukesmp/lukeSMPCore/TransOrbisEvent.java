@@ -66,14 +66,16 @@ public class TransOrbisEvent implements Listener {
                                 if(749 <= location.getBlockZ() && location.getBlockZ() <= 775) {
                                     Block center = location.getWorld().getBlockAt(-1040, 58, 762);
                                     if(center.getLocation().distance(location) <= 13) {
+
                                         //teleport to abyssal spire
-                                        //plugin message Connect to another server
                                         player.sendMessage(ChatColor.GREEN + "Connecting to the Abyssal Spire...");
 
                                         ByteArrayDataOutput out = ByteStreams.newDataOutput();
                                         out.writeUTF("Connect");
                                         out.writeUTF("AbyssalSpire");
                                         plugin.getServer().sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
+
+                                        plugin.addPlayerToAbyssalSpire(player);
                                     }
                                 }
                             }

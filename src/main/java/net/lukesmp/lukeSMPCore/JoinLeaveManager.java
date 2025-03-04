@@ -1,5 +1,6 @@
 package net.lukesmp.lukeSMPCore;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -20,6 +21,10 @@ public class JoinLeaveManager implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) throws IOException {
         Player player=event.getPlayer();
+        
+        if(plugin.removePlayerFromAbyssalSpire(player)) {
+            player.teleport(Bukkit.getWorld("world").getSpawnLocation());
+        }
 
         //tab header/footer
         player.setPlayerListHeader(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"Luke"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP"+ChatColor.GRAY+""+ChatColor.BOLD+""+ChatColor.MAGIC+" | "+ChatColor.RED+""+ChatColor.BOLD+"Season V");
