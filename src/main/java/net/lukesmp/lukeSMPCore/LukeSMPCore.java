@@ -40,6 +40,7 @@ public final class LukeSMPCore extends JavaPlugin implements Listener {
         }
 
         getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+        getServer().getMessenger().registerOutgoingPluginChannel(this,"lukeSMPCore:spire");
     }
 
     @Override
