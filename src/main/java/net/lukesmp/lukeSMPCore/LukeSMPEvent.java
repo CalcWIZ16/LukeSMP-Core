@@ -7,7 +7,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerChatEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.potion.PotionEffectType;
 
 public class LukeSMPEvent implements Listener {
@@ -18,12 +17,6 @@ public class LukeSMPEvent implements Listener {
         event.setFormat(ChatColor.DARK_AQUA+player+ChatColor.RESET+" "+ChatColor.GRAY+ChatColor.BOLD+ChatColor.MAGIC+"|"+ChatColor.RESET+" "+ChatColor.RESET+ChatColor.GRAY+chat);
     }
 
-    @EventHandler
-    public void onPlayerQuit(PlayerQuitEvent event){
-        Player player=event.getPlayer();
-        //change quit message
-        event.setQuitMessage(ChatColor.DARK_AQUA+"Luke"+ChatColor.DARK_PURPLE+"SMP"+ChatColor.GRAY+""+ChatColor.BOLD+ChatColor.MAGIC+" | "+ChatColor.RED+player.getDisplayName()+ChatColor.GRAY+" has left");
-    }
     @EventHandler
     public void playerDeathEvent(PlayerDeathEvent event) {
         Player player = event.getEntity().getPlayer();
