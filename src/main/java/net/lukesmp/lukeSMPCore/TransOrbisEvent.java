@@ -75,7 +75,12 @@ public class TransOrbisEvent implements Listener {
                                         out.writeUTF("AbyssalSpire");
                                         plugin.getServer().sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
 
-                                        new InventorySender(plugin).sendInventory(player, "AbyssalSpire");
+                                        new BukkitRunnable() {
+                                            @Override
+                                            public void run() {
+                                                new InventorySender(plugin).sendInventory(player, "AbyssalSpire");
+                                            }
+                                        }.runTaskLater(plugin, 40L);
 
                                         plugin.addPlayerToAbyssalSpire(player);
                                     }

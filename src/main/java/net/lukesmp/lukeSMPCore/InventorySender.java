@@ -1,5 +1,6 @@
 package net.lukesmp.lukeSMPCore;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -24,7 +25,7 @@ public class InventorySender {
         try {
             dataOutputStream.writeUTF("Forward");
             dataOutputStream.writeUTF(targetServer);
-            dataOutputStream.writeUTF("InventoryChannel");
+            dataOutputStream.writeUTF("inv");
 
             ByteArrayOutputStream msgBytes = new ByteArrayOutputStream();
             DataOutputStream msgOut = new DataOutputStream(msgBytes);
@@ -45,7 +46,7 @@ public class InventorySender {
             dataOutputStream.writeShort(msgBytes.toByteArray().length);
             dataOutputStream.write(msgBytes.toByteArray());
 
-            player.sendPluginMessage(plugin, "BungeeCord", byteArrayOutputStream.toByteArray());
+            player.sendPluginMessage(plugin, "lukesmp:inv", byteArrayOutputStream.toByteArray());
         } catch (IOException e) {
             e.printStackTrace();
         }
