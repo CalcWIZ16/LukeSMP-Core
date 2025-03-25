@@ -1,54 +1,37 @@
 package net.lukesmp.lukeSMPCore;
 
-import org.bukkit.Bukkit;
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.util.Base64;
 
 public class InventorySender {
+    public static void sendInventoryData(JavaPlugin plugin, Player player) {
+        ByteArrayDataOutput out = ByteStreams.newDataOutput();
+        out.writeUTF("SendInventory");
+        out.writeUTF(player.getUniqueId().toString());
+        out.writeUTF(serializeInventory(player)); // Serialize inventory
 
-    private final JavaPlugin plugin;
-
-    public InventorySender(JavaPlugin plugin) {
-        this.plugin = plugin;
+        player.sendPluginMessage(plugin, "spire:inv", out.toByteArray());
     }
 
-    public void sendInventory(Player player, String targetServer) {
-        ItemStack[] inventoryContents = player.getInventory().getContents();
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
+    public static String serializeInventory(Player player) {
+        YamlConfiguration config = new YamlConfiguration();
 
-        try {
-            dataOutputStream.writeUTF("Forward");
-            dataOutputStream.writeUTF(targetServer);
-            dataOutputStream.writeUTF("inv");
-
-            ByteArrayOutputStream msgBytes = new ByteArrayOutputStream();
-            DataOutputStream msgOut = new DataOutputStream(msgBytes);
-
-            msgOut.writeUTF(player.getName());
-            msgOut.writeInt(inventoryContents.length);
-
-            for (ItemStack item : inventoryContents) {
-                if (item != null) {
-                    msgOut.writeUTF(item.getType().name());
-                    msgOut.writeInt(item.getAmount());
-                    // Add more item data as needed (e.g., item meta)
-                } else {
-                    msgOut.writeUTF("null");
-                }
-            }
-
-            dataOutputStream.writeShort(msgBytes.toByteArray().length);
-            dataOutputStream.write(msgBytes.toByteArray());
-
-            player.sendPluginMessage(plugin, "lukesmp:inv", byteArrayOutputStream.toByteArray());
-        } catch (IOException e) {
-            e.printStackTrace();
+        // Iterate through 36 main slots
+        for (int i = 0; i < 36; i++) {
+            config.set("slot_" + i, player.getInventory().getItem(i));
         }
+
+        // Add armor and offhand
+        config.set("armor_helmet", player.getInventory().getHelmet());
+        config.set("armor_chestplate", player.getInventory().getChestplate());
+        config.set("armor_leggings", player.getInventory().getLeggings());
+        config.set("armor_boots", player.getInventory().getBoots());
+        config.set("offhand", player.getInventory().getItemInOffHand());
+
+        return Base64.getEncoder().encodeToString(config.saveToString().getBytes()); // Convert to Base64
     }
 }

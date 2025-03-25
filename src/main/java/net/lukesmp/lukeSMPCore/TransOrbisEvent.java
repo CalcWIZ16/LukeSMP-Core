@@ -67,20 +67,15 @@ public class TransOrbisEvent implements Listener {
                                     Block center = location.getWorld().getBlockAt(-1040, 58, 762);
                                     if(center.getLocation().distance(location) <= 13) {
 
+                                        InventorySender.sendInventoryData(plugin, player);
+
                                         //teleport to abyssal spire
                                         player.sendMessage(ChatColor.GREEN + "Connecting to the Abyssal Spire...");
 
                                         ByteArrayDataOutput out = ByteStreams.newDataOutput();
                                         out.writeUTF("Connect");
                                         out.writeUTF("AbyssalSpire");
-                                        plugin.getServer().sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
-
-                                        new BukkitRunnable() {
-                                            @Override
-                                            public void run() {
-                                                new InventorySender(plugin).sendInventory(player, "AbyssalSpire");
-                                            }
-                                        }.runTaskLater(plugin, 40L);
+                                        player.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
 
                                         plugin.addPlayerToAbyssalSpire(player);
                                     }
