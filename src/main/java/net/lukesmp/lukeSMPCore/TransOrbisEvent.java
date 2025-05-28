@@ -63,25 +63,25 @@ public class TransOrbisEvent implements Listener {
                     if(location.getWorld() == Bukkit.getWorld("world")) {
                         if(-1053 <= location.getBlockX() && location.getBlockX() <= -1027) {
                             //abyssal spire trigger
-                            if(50 <= location.getBlockY() && location.getBlockY() <= 65) {
-                                if(749 <= location.getBlockZ() && location.getBlockZ() <= 775) {
-                                    Block center = location.getWorld().getBlockAt(-1040, 58, 762);
-                                    if(center.getLocation().distance(location) <= 13) {
-
-                                        InventorySender.sendInventoryData(plugin, player);
-
-                                        //teleport to abyssal spire
-                                        player.sendMessage(ChatColor.GREEN + "Connecting to the Abyssal Spire...");
-
-                                        ByteArrayDataOutput out = ByteStreams.newDataOutput();
-                                        out.writeUTF("Connect");
-                                        out.writeUTF("AbyssalSpire");
-                                        player.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
-
-                                        plugin.addPlayerToAbyssalSpire(player);
-                                    }
-                                }
-                            }
+//                            if(50 <= location.getBlockY() && location.getBlockY() <= 65) {
+//                                if(749 <= location.getBlockZ() && location.getBlockZ() <= 775) {
+//                                    Block center = location.getWorld().getBlockAt(-1040, 58, 762);
+//                                    if(center.getLocation().distance(location) <= 13) {
+//
+//                                        InventorySender.sendInventoryData(plugin, player);
+//
+//                                        //teleport to abyssal spire
+//                                        player.sendMessage(ChatColor.GREEN + "Connecting to the Abyssal Spire...");
+//
+//                                        ByteArrayDataOutput out = ByteStreams.newDataOutput();
+//                                        out.writeUTF("Connect");
+//                                        out.writeUTF("AbyssalSpire");
+//                                        player.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
+//
+//                                        plugin.addPlayerToAbyssalSpire(player);
+//                                    }
+//                                }
+//                            }
                             //on n-s axis
                             if(-1043 <= location.getBlockX() && location.getBlockX() <= -1037) {
                                 // south pillar (season 1 portal)
