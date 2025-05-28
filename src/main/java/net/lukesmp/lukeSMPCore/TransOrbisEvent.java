@@ -290,7 +290,7 @@ public class TransOrbisEvent implements Listener {
                 Bukkit.getConsoleSender().sendMessage("Key location for player " + player.getName() + ": " + keylocation);
                 if(keylocation != null) {
                     if(keylocation.getBlock().getType() == Material.EMERALD_BLOCK) {
-                        player.sendMessage(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"Luke"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP"+ChatColor.GRAY+""+ChatColor.BOLD+""+ChatColor.MAGIC+" | "+ChatColor.GRAY+"Retrieve your items from this season utilizing the "+ ChatColor.GREEN+"/retrieve"+ChatColor.GRAY+" command. By running this command, your inventory and ender chest from your current world will be dropped at your location. Be sure you have a place nearby to store them!");
+                        player.sendMessage(ChatColor.DARK_AQUA+"Luke"+ChatColor.DARK_PURPLE+"SMP"+ChatColor.RESET+" "+ChatColor.GRAY+ChatColor.BOLD+ChatColor.MAGIC+"|"+ChatColor.RESET+" "+ChatColor.RESET+ChatColor.GRAY+"Retrieve your items from this season utilizing the "+ ChatColor.GREEN+"/retrieve"+ChatColor.GRAY+" command. By running this command, your inventory and ender chest from your current world will be dropped at your location. Be sure you have a place nearby to store them!");
                     }
                 }
             }
