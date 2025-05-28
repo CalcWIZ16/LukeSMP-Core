@@ -85,12 +85,75 @@ public class InventoryRetriever {
                     return null;
             }
         } else if(world.getName().equals("s3world")) {
-            return null;
+            switch(playerUUID.toString()) {
+                case "2c1f5eaf-cc7e-4016-a836-05a81e300ca4": //Charles_InCharge
+                    return new Location(world, 52, -63, 166);
+                case "7a3b1fd6-e326-4199-b193-c016dabe6ca3": //octopusloli
+                    return new Location(world, 51, -63, 166);
+                case "8f873c77-5887-4caa-8498-a5dbd1b0020c": //SirDuckV
+                    return new Location(world, 50, -63, 166);
+                case "32eb72fb-daa3-4f9d-91b6-82031daac3a3": //Light_5_Squid
+                    return new Location(world, 49, -63, 166);
+                case "34bd903f-d104-4e00-94be-75c9cbf24160": //f1akk1
+                    return new Location(world, 48, -63, 166);
+                case "527a81b5-190e-4b53-9300-7de72ce9051c": //Aim5300
+                    return new Location(world, 47, -63, 166);
+                case "5322c15c-d869-44ea-8e99-7e1cef98d13b": //Reesiee_
+                    return new Location(world, 46, -63, 166);
+                case "9892dd76-039a-4294-91d8-d2440ade9346": //HeftyHank225
+                    return new Location(world, 52, -63, 161);
+                case "8cee743b-08a5-4c37-a833-cdf06fb8f5c3": //_yumigasm_
+                    return new Location(world, 51, -63, 161);
+                case "617370cd-dcdd-4de1-8045-cac18ff67cf2": //Anadakiller
+                    return new Location(world, 50, -63, 161);
+                case "46257261-7468-4a8b-bb32-b7f5a78f7a0a": //CalcWIZ
+                    return new Location(world, 49, -63, 161);
+                case "47306497-6118-444f-a72e-e44be2acc73a": //Matteoweo
+                    return new Location(world, 48, -63, 161);
+                case "a0b1a9e2-0479-441e-b977-367e1908e614": //AresBird
+                    return new Location(world, 47, -63, 161);
+                case "c33fab6b-68e1-42f6-9038-7db3b0cc5a9d": //BrooklynBrew
+                    return new Location(world, 46, -63, 161);
+                default:
+                    return null;
+            }
         } else if(world.getName().equals("s4world")) {
-            return null;
-        } else {
-            return null;
+            switch(playerUUID.toString()) {
+                case "2c1f5eaf-cc7e-4016-a836-05a81e300ca4": //Charles_InCharge
+                    return new Location(world, 4, -63, 4);
+                case "3a49ddd2-fe15-429e-b35a-a1ea5ae38155": //mochigengar
+                    return new Location(world, 3, -63, 4);
+                case "03e8ddbb-559a-4dee-b1d3-25c7da0e70a1": //CremmyFresh
+                    return new Location(world, 2, -63, 4);
+                case "6ab17125-5ea4-4945-a200-75b5114b97ca": //TheYoungNanesh
+                    return new Location(world, 1, -63, 4);
+                case "8cee743b-08a5-4c37-a833-cdf06fb8f5c3": //_yumigasm_
+                    return new Location(world, 0, -63, 4);
+                case "09a84c46-0c8e-47e9-b4c1-c7fbb4efee00": //midniii56
+                    return new Location(world, -1, -63, 4);
+                case "9b4c0010-bcd1-4795-87f5-9bbdea59415f": //DarnedPen
+                    return new Location(world, -2, -63, 4);
+                case "32eb72fb-daa3-4f9d-91b6-82031daac3a3": //Light_5_Squid
+                    return new Location(world, -3, -63, 4);
+                case "527a81b5-190e-4b53-9300-7de72ce9051c": //Aim5300
+                    return new Location(world, 4, -63, -1);
+                case "839eeda3-7116-4b28-8cc9-d5cf5e404eba": //Sayik_
+                    return new Location(world, 3, -63, -1);
+                case "9892dd76-039a-4294-91d8-d2440ade9346": //HeftyHank225
+                    return new Location(world, 2, -63, -1);
+                case "617370cd-dcdd-4de1-8045-cac18ff67cf2": //Anadakiller
+                    return new Location(world, 1, -63, -1);
+                case "46257261-7468-4a8b-bb32-b7f5a78f7a0a": //CalcWIZ
+                    return new Location(world, 0, -63, -1);
+                case "47306497-6118-444f-a72e-e44be2acc73a": //Matteoweo
+                    return new Location(world, -1, -63, -1);
+                case "c33fab6b-68e1-42f6-9038-7db3b0cc5a9d": //BrooklynBrew
+                    return new Location(world, -2, -63, -1);
+                case "f9f3cc81-df7e-4f99-ab6c-72967f526b51": //ankleBowl
+                    return new Location(world, -3, -63, -1);
+            }
         }
+        return null;
     }
 
     public static ArrayList<ItemStack> readItemStacksFromContainer(Location location) {

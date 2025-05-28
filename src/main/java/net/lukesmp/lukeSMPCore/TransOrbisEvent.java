@@ -100,7 +100,7 @@ public class TransOrbisEvent implements Listener {
                                 if(819 <= location.getBlockZ() && location.getBlockZ() <= 825) {
                                     transport(player, Bukkit.getWorld("s1world"));
                                 }
-                                // north pillar (season 3 portal)
+//                                 north pillar (season 3 portal)
 //                                if(710 <= location.getBlockZ() && location.getBlockZ() <= 730) {
 //                                    if(124 <= location.getBlockY() == location.getBlockY() <= 130) {
 //                                        Location enchantLoc = new Location(Bukkit.getWorld("world"), -1039.5, 126, 706.5);
