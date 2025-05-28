@@ -49,7 +49,7 @@ public class LukeSMPCommand implements CommandExecutor {
         }
         if(command.getName().equalsIgnoreCase("retrieve")){
             if(args.length == 0) {
-                sender.sendMessage(ChatColor.RED + "Please confirm");
+                sender.sendMessage(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"Luke"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP"+ChatColor.GRAY+""+ChatColor.BOLD+""+ChatColor.MAGIC+" | "+ChatColor.GRAY+"Be sure you have somewhere to store your items before using this command. When you are ready, run "+ChatColor.GREEN+"/retrieve confirm"+ChatColor.GRAY+" to retrieve your items.");
                 return true;
             }
             if(args.length == 1) {

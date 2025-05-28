@@ -13,6 +13,7 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
+import org.bukkit.util.ChatPaginator;
 import org.bukkit.util.Vector;
 
 import java.util.HashSet;
@@ -225,6 +226,13 @@ public class TransOrbisEvent implements Listener {
                 player.teleport(finalDestination);
                 player.addPotionEffect(PotionEffectType.SLOW_FALLING.createEffect(100,0));
                 playersInTransit.remove(player.getUniqueId());
+
+                Location keylocation = InventoryRetriever.getKeyLocation(player.getUniqueId(), destinationWorld);
+                if(keylocation != null) {
+                    if(keylocation.getBlock().getType() == Material.EMERALD_BLOCK) {
+                        player.sendMessage(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"Luke"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP"+ChatColor.GRAY+""+ChatColor.BOLD+""+ChatColor.MAGIC+" | "+ChatColor.GRAY+"Retrieve your items from this season utilizing the "+ ChatColor.GREEN+"/retrieve"+ChatColor.GRAY+" command. By running this command, your inventory and ender chest from your current world will be dropped at your location. Be sure you have a place nearby to store them!");
+                    }
+                }
             }
         }.runTaskLater(plugin, 40L);
 

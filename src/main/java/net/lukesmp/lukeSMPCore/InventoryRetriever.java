@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class InventoryRetriever {
-
     public static Location getKeyLocation(UUID playerUUID, World world) {
         Bukkit.getConsoleSender().sendMessage("Player UUID: " + playerUUID.toString());
         if (world.getName().equals("s1world")) {
