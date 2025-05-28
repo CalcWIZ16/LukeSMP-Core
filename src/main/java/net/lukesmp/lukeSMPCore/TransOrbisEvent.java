@@ -126,7 +126,7 @@ public class TransOrbisEvent implements Listener {
                             // west pillar (season 2 portal)
                             if(-1092 <= location.getBlockX() && location.getBlockX() <= -1072) {
                                 if(124 <= location.getBlockY() == location.getBlockY() <= 130) {
-                                    Location enchantLoc = new Location(Bukkit.getWorld("world"), -1096.5, 126, 762.5);
+                                    Location enchantLoc = new Location(Bukkit.getWorld("world"), -1095.5, 126, 762.5);
                                     for (int i = 0; i < 10; i++) {
                                         new BukkitRunnable() {
                                             @Override
@@ -143,7 +143,7 @@ public class TransOrbisEvent implements Listener {
                             // east pillar (season 4 portal)
                             if(-1008 <= location.getBlockX() && location.getBlockX() <= -988) {
                                 if(124 <= location.getBlockY() == location.getBlockY() <= 130) {
-                                    Location enchantLoc = new Location(Bukkit.getWorld("world"), -983, 126, 762.5);
+                                    Location enchantLoc = new Location(Bukkit.getWorld("world"), -983.5, 126, 762.5);
                                     for (int i = 0; i < 10; i++) {
                                         new BukkitRunnable() {
                                             @Override
@@ -188,18 +188,18 @@ public class TransOrbisEvent implements Listener {
                             // entrance particles
                             if(15 <= location.getBlockX() && location.getBlockX() <= 35) {
                                 if(64 <= location.getBlockY() && location.getBlockY() <= 70) {
-                                    Location loc1 = new Location(Bukkit.getWorld("s2world"), 20.5, 66, 170.5);//check location
+                                    Location loc1 = new Location(Bukkit.getWorld("s2world"), 39.5, 66, 168.5);//check location
                                     for(int i = 0; i < 10; i++) {
                                         new BukkitRunnable() {
                                             @Override
                                             public void run() {
-                                                player.getWorld().spawnParticle(Particle.ENCHANT, loc1, 10, 1, 1, 0);
+                                                player.getWorld().spawnParticle(Particle.ENCHANT, loc1, 10, 0, 1, 1);
                                             }
                                         }.runTaskLater(plugin, i);
                                     }
                                 }
                             }
-                            if(39 <= location.getBlockX() && location.getBlockX() <= 47) {
+                            if(40 <= location.getBlockX() && location.getBlockX() <= 46) {
                                 transport(player, Bukkit.getWorld("world"));
                             }
 
@@ -211,7 +211,7 @@ public class TransOrbisEvent implements Listener {
                             // entrance particles
                             if(194 <= location.getBlockZ() && location.getBlockZ() <= 214) {
                                 if(92 <= location.getBlockY() && location.getBlockY() <= 98) {
-                                    Location loc1 = new Location(Bukkit.getWorld("s3world"), 50.5, 66, 191.5); //check location
+                                    Location loc1 = new Location(Bukkit.getWorld("s3world"), 48.5, 94, 218.5); //check location
                                     for(int i = 0; i < 10; i++) {
                                         new BukkitRunnable() {
                                             @Override
@@ -222,7 +222,7 @@ public class TransOrbisEvent implements Listener {
                                     }
                                 }
                             }
-                            if(48 <= location.getBlockZ() && location.getBlockZ() <= 54) {
+                            if(219 <= location.getBlockZ() && location.getBlockZ() <= 225) {
                                 transport(player, Bukkit.getWorld("world"));
                             }
                         }
@@ -233,18 +233,18 @@ public class TransOrbisEvent implements Listener {
                             // entrance particles
                             if(-52 <= location.getBlockX() && location.getBlockX() <= -32) {
                                 if(88 <= location.getBlockY() && location.getBlockY() <= 94) {
-                                    Location loc1 = new Location(Bukkit.getWorld("s4world"), -15.5, 106, -63.5); //check location
+                                    Location loc1 = new Location(Bukkit.getWorld("s4world"), -55.5, 90, 0.5); //check location
                                     for(int i = 0; i < 10; i++) {
                                         new BukkitRunnable() {
                                             @Override
                                             public void run() {
-                                                player.getWorld().spawnParticle(Particle.ENCHANT, loc1, 10, 1, 1, 0);
+                                                player.getWorld().spawnParticle(Particle.ENCHANT, loc1, 10, 0, 1, 1);
                                             }
                                         }.runTaskLater(plugin, i);
                                     }
                                 }
                             }
-                            if(-20 <= location.getBlockZ() && location.getBlockZ() <= -14) {
+                            if(-63 <= location.getBlockX() && location.getBlockX() <= -57) {
                                 transport(player, Bukkit.getWorld("world"));
                             }
                         }
@@ -268,13 +268,13 @@ public class TransOrbisEvent implements Listener {
                 destination = new Location(destinationWorld, -95.5, 122, -47.5);
                 break;
             case "s2world":
-                destination = new Location(destinationWorld, -16.9, 83, 168.5);
+                destination = new Location(destinationWorld, -16.9, 84, 168.5);
                 break;
             case "s3world":
-                destination = new Location(destinationWorld, 48, 84, 191);
+                destination = new Location(destinationWorld, 48.5, 104, 162.5);
                 break;
             case "s4world":
-                destination = new Location(destinationWorld, -15, 110, -63);
+                destination = new Location(destinationWorld, 0.5, 100, 0.5);
                 break;
         }
 
@@ -287,6 +287,7 @@ public class TransOrbisEvent implements Listener {
                 playersInTransit.remove(player.getUniqueId());
 
                 Location keylocation = InventoryRetriever.getKeyLocation(player.getUniqueId(), destinationWorld);
+                Bukkit.getConsoleSender().sendMessage("Key location for player " + player.getName() + ": " + keylocation);
                 if(keylocation != null) {
                     if(keylocation.getBlock().getType() == Material.EMERALD_BLOCK) {
                         player.sendMessage(ChatColor.DARK_AQUA+""+ChatColor.BOLD+"Luke"+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"SMP"+ChatColor.GRAY+""+ChatColor.BOLD+""+ChatColor.MAGIC+" | "+ChatColor.GRAY+"Retrieve your items from this season utilizing the "+ ChatColor.GREEN+"/retrieve"+ChatColor.GRAY+" command. By running this command, your inventory and ender chest from your current world will be dropped at your location. Be sure you have a place nearby to store them!");
