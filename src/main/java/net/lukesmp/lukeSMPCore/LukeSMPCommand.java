@@ -15,7 +15,7 @@ public class LukeSMPCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(command.getName().equalsIgnoreCase("getworld")){
-            if (sender instanceof Player){
+            if(sender instanceof Player){
                 Player player = (Player) sender;
                 if(player.getUniqueId().toString().equals("f1460c69-e2fd-4e43-ab00-3cbc81340d6b") || player.getUniqueId().toString().equals("46257261-7468-4a8b-bb32-b7f5a78f7a0a")) {
                     player.sendMessage(player.getWorld().getName().toString());
@@ -56,16 +56,16 @@ public class LukeSMPCommand implements CommandExecutor {
             }
             if(args.length == 1) {
                 if(args[0].equalsIgnoreCase("confirm")) {
-                    if (sender instanceof Player) {
+                    if(sender instanceof Player) {
                         Player player = (Player) sender;
                         Location keyLocation = InventoryRetriever.getKeyLocation(player.getUniqueId(), player.getWorld());
 
-                        if (keyLocation == null) {
+                        if(keyLocation == null) {
                             player.sendMessage(ChatColor.RED + "You do not have any items to retrieve in this world");
                             return true;
                         }
 
-                        if (keyLocation.getBlock().getType() == Material.EMERALD_BLOCK) {
+                        if(keyLocation.getBlock().getType() == Material.EMERALD_BLOCK) {
                             InventoryRetriever.giveItemStacksToPlayer(InventoryRetriever.readItemStacksFromContainer(keyLocation.subtract(0, 0, 1)), player);
                             InventoryRetriever.giveItemStacksToPlayer(InventoryRetriever.readItemStacksFromContainer(keyLocation.subtract(0, 0, 1)), player);
                             player.sendMessage(ChatColor.GREEN + "Items have been retrieved");
