@@ -17,35 +17,37 @@ public class LukeSMPCommand implements CommandExecutor {
         if(command.getName().equalsIgnoreCase("getworld")){
             if (sender instanceof Player){
                 Player player = (Player) sender;
-                player.sendMessage(player.getWorld().getName().toString());
+                if(player.getUniqueId().toString().equals("f1460c69-e2fd-4e43-ab00-3cbc81340d6b") || player.getUniqueId().toString().equals("46257261-7468-4a8b-bb32-b7f5a78f7a0a")) {
+                    player.sendMessage(player.getWorld().getName().toString());
+                    return true;
+                }
             }
             return true;
         }
         if(command.getName().equalsIgnoreCase("world")) {
-            if (args.length == 0) {
-                sender.sendMessage(ChatColor.RED + "Please specify a world!");
-                return true;
-            }
-            if (args.length == 1) {
-                World world = Bukkit.getWorld(args[0]);
-                if (world == null) {
-                    sender.sendMessage(ChatColor.RED + "That world does not exist!");
-                    return true;
-                }
-                if (sender instanceof Player) {
-                    Player player = (Player) sender;
-                    if(player.getUniqueId().toString().equals("f1460c69-e2fd-4e43-ab00-3cbc81340d6b") || player.getUniqueId().toString().equals("46257261-7468-4a8b-bb32-b7f5a78f7a0a")) {
+            if(sender instanceof Player) {
+                Player player = (Player) sender;
+                if(player.getUniqueId().toString().equals("f1460c69-e2fd-4e43-ab00-3cbc81340d6b")) {
+                    if(args.length == 0) {
+                        sender.sendMessage(ChatColor.RED + "Please specify a world!");
+                        return true;
+                    }
+                    if(args.length == 1) {
+                        World world = Bukkit.getWorld(args[0]);
+                        if(world == null) {
+                            sender.sendMessage(ChatColor.RED + "That world does not exist!");
+                            return true;
+                        }
                         player.teleport(world.getSpawnLocation());
                         player.sendMessage(ChatColor.GREEN + "Teleported to " + world.getName());
                         return true;
                     }
-                    player.teleport(world.getSpawnLocation());
-                    player.sendMessage(ChatColor.GREEN + "Teleported to " + world.getName());
-                    return true;
                 }
-                sender.sendMessage(ChatColor.RED + "You must be a player to use this command!");
+                sender.sendMessage(ChatColor.RED + "You do not have permission to use this command!");
                 return true;
             }
+            sender.sendMessage(ChatColor.RED + "You must be a player to use this command!");
+            return true;
         }
         if(command.getName().equalsIgnoreCase("retrieve")){
             if(args.length == 0) {
